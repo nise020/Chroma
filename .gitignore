@@ -33,4 +33,5 @@ UserSettings/
 # Custom rule to ignore FBX files
 *.fbx
 *.pug
+*.tga
 
