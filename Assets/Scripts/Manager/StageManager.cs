@@ -55,6 +55,7 @@ public class StageManager : MonoBehaviour
     private int beforeScore;
     private int afterScore;
     private bool endWindowShow = false;
+    private bool rankSummitted = false;
     
     public bool IsIntermission {  get; private set; }
     public event Action<bool> OnIntermissionChanged;
@@ -94,6 +95,7 @@ public class StageManager : MonoBehaviour
         currentSurvivalTime = 0;
         endWindowShow = false;
         IsIntermission = false;
+        rankSummitted = false;
 
         stageLog.Clear();
     }
@@ -399,6 +401,23 @@ public class StageManager : MonoBehaviour
             nextStage = (STAGE)((int)currentStage + 1);
             bool isLastStage = !Enum.IsDefined(typeof(STAGE), nextStage);
 
+            if (isLastStage && !rankSummitted)
+            {
+                rankSummitted = true;
+
+                var server = Server.instanse;
+                if (server != null && !string.IsNullOrEmpty(server.UserId))
+                {
+                    var finalScore = GameShard.Instance.GameManager.GetScore();
+                    server.SaveRankData(finalScore).Forget(); // fire-and-forget
+                    Debug.LogWarning($"{server.UserId } score is {finalScore}");
+                }
+                else
+                {
+                    Debug.LogWarning("Server is null or not logged in");
+                }
+            }
+            
             var rec = stageLog.TryGetValue(currentStage, out var v) ? v : new StageRecord();
             var acquired = new List<ClearTab.ItemEntry>();
             foreach (var g in rec.items)
