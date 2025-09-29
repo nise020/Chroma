@@ -51,6 +51,9 @@ ShaderVariantCollection:
       - keywords: DOTS_INSTANCING_ON INSTANCING_ON _ALPHATEST_ON _COLORADDSUBDIFF_ON
           _GBUFFER_NORMALS_OCT _NORMALMAP
         passType: 13
+  - first: {fileID: 4800000, guid: 2ba3ea62053e4584fb5f829f88027c3a, type: 3}
+    second:
+      variants: []
   - first: {fileID: 4800000, guid: 313fcf3aebc04cf4ab4f8c5f2850be7f, type: 3}
     second:
       variants:
@@ -88,10 +91,9 @@ ShaderVariantCollection:
         passType: 0
   - first: {fileID: -6465566751694194690, guid: 1c658274f9a314546be62e32eea23521, type: 3}
     second:
-      variants: []
-  - first: {fileID: 4800000, guid: 2ba3ea62053e4584fb5f829f88027c3a, type: 3}
-    second:
-      variants: []
+      variants:
+      - keywords: DEBUG_DISPLAY
+        passType: 0
   - first: {fileID: -6465566751694194690, guid: 94156f61f72b54f408d7f9bfb9547503, type: 3}
     second:
       variants: []
