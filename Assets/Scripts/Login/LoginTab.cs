@@ -182,7 +182,7 @@ public class LoginTab : MonoBehaviour
         IDKey = IdText.text;
         UserPassKey = PasswordText.text;
 
-        Server.instanse.LoginDBPost(IDKey, UserPassKey);
+        await Server.instanse.LoginDBPost(IDKey, UserPassKey);
 
         await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
 
@@ -199,8 +199,8 @@ public class LoginTab : MonoBehaviour
         UserPassKey = PasswordText.text;
         NameKey = nameText.text;
 
-        Server.instanse.AccountCreat(IDKey,UserPassKey);
-        Server.instanse.NameDBPost(IDKey, NameKey);
+        await Server.instanse.AccountCreat(IDKey,UserPassKey);
+        await Server.instanse.NameDBPost(IDKey, NameKey);
 
         
         await UniTask.Delay(TimeSpan.FromSeconds(1.0f));

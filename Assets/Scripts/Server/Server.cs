@@ -1,7 +1,9 @@
+using Cysharp.Threading.Tasks;
 using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -48,17 +50,21 @@ public partial class Server : MonoBehaviour
     //{
     //    //StartCoroutine(DBPost(Http+ LoginUrl, "dev"));
     //}
-    public void AccountCreat(string id, string passward)
+    public async UniTask AccountCreat(string id, string passward)
     {
         StartCoroutine(CraetDBPost(Http + accountCreatUrl, id, passward));
+        await UniTask.CompletedTask;
     }
-    public void LoginDBPost(string id, string passward)
+    public async UniTask LoginDBPost(string _id, string passward)
     {
-        StartCoroutine(LoginDBPost(Http + loginUrl, id, passward));
+        StartCoroutine(LoginDBPost(Http + loginUrl, _id, passward));
+        beforeScore = await ScoreDataLoad(_id);
+        await UniTask.CompletedTask;
     }
-    public void NameDBPost(string id, string name)
+    public async UniTask NameDBPost(string id, string name)
     {
         StartCoroutine(NameDBPost(Http + nameCreatUrl, id, name));
+        await UniTask.CompletedTask;
     }
     public void MessageOn(JSONNode _json) 
     {

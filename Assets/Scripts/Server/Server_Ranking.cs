@@ -17,16 +17,26 @@ public partial class Server : MonoBehaviour
     //Rank Score Load
     string rankDataScoreLoadUrl = "process/rankingscore";
 
-    //public List<RankEntry> serverData = new();
+    public int beforeScore { get; private set; }
     public async Task<List<RankEntry>> LoadRankData()
     {
         List<RankEntry> serverData = await RankListLoad(Http + rankDataListLoadUrl);
         return serverData;
     }
 
-    public async UniTask SaveRankData(string _id,int score)
+    public async UniTask SaveRankData(int _newScore)
     {
-        await PostRankDataSave(Http + rankDataSaveUrl, _id, score);
+        beforeScore = await ScoreDataLoad(UserId);
+
+        if (beforeScore < _newScore)
+        {
+            await PostRankDataSave(Http + rankDataSaveUrl, UserId, _newScore);
+            await UniTask.CompletedTask;
+        }
+        else 
+        {
+            Debug.LogWarning($"before = {beforeScore} > now = {_newScore}");
+        }
         await UniTask.CompletedTask;
     }
 

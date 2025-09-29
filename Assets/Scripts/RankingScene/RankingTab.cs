@@ -45,14 +45,19 @@ public class RankingTab : MonoBehaviour
     }
     public async UniTask RankSetting()
     {
-        List<RankEntry> ranklist = await Server.instanse.LoadRankData();
+        //data = await Server.instanse.LoadRankData();
+
+        //if (data.Count == 0) 
+        //{
+        //    return;
+        //}
 
         pageDataSize = 5;
 
         if (rowTemplate)
             rowTemplate.gameObject.SetActive(false);
 
-        BuildDummy(); //Create DummyData <- Not server
+        //BuildDummy(); //Create DummyData <- Not server
 
         var me = data.Find(e => e.id == myId) ?? data[0];
         if (myRank) 
