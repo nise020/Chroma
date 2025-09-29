@@ -2,44 +2,85 @@ using Cysharp.Threading.Tasks;
 using NUnit.Framework;
 using SimpleJSON;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public partial class Server : MonoBehaviour
 {
     //string Http = "http://58.78.211.182:3000/";//¼­¹ö 
-    string NameCreatUrl = "process/namecreate";
-    public List<RankEntry> serverData = new();
-    public async UniTask RankData()
+
+    //Rank List Load
+    string rankDataListLoadUrl = "process/rankinglist";
+    //Ranf Score Save
+    string rankDataSaveUrl = "process/rankingsave";
+    //Rank Score Load
+    string rankDataScoreLoadUrl = "process/rankingscore";
+
+    //public List<RankEntry> serverData = new();
+    public async Task<List<RankEntry>> LoadRankData()
     {
-        await LoadRankData(Http+NameCreatUrl);
+        List<RankEntry> serverData = await RankListLoad(Http + rankDataListLoadUrl);
+        return serverData;
     }
-    public async UniTask LoadRankData(string url) 
+
+    public async UniTask SaveRankData(string _id,int score)
+    {
+        await PostRankDataSave(Http + rankDataSaveUrl, _id, score);
+        await UniTask.CompletedTask;
+    }
+
+    public async Task<int> ScoreDataLoad(string _id)
+    {
+        int score = await RankScoreLoad(Http + rankDataScoreLoadUrl, _id);
+        return score;
+    }
+    public async Task<List<RankEntry>> RankListLoad(string url) 
     {
         UnityWebRequest www = UnityWebRequest.Get(url);
 
         await www.SendWebRequest();
+
+        List<RankEntry> serverData = new();
         if (www.result == UnityWebRequest.Result.Success)
         {
             JSONNode node = JSONNode.Parse(www.downloadHandler.text);
+
             for (int i = 0; i < node.Count; i++) 
             {
                 string dbId = node[i]["id"];
-                string dbPw = node[i]["name"];
+                int dbScore = node[i]["score"];
 
                 serverData[i].id = dbId;
-                serverData[i].name = name;
+                serverData[i].score = dbScore;
             }
         }
-        await UniTask.CompletedTask;
+        return serverData;
     }
+    public async Task<int> RankScoreLoad(string url, string _id)
+    {
+        int score = 0;
+        WWWForm form = new WWWForm();
+        form.AddField("id", _id);
 
-    public async UniTask PostRankData(string url,string _id,string _name)
+        UnityWebRequest www = UnityWebRequest.Post(url,form);
+
+        await www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            JSONNode node = JSONNode.Parse(www.downloadHandler.text);
+
+            score = node["score"];
+        }
+        return score;
+    }
+    public async UniTask PostRankDataSave(string url,string _id,int _score)
     {
         WWWForm form = new WWWForm();
 
         form.AddField("id", _id);
-        form.AddField("name", _name);
+        form.AddField("score", _score);
 
         UnityWebRequest www = UnityWebRequest.Post(url,form);
 

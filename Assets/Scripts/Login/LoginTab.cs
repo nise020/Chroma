@@ -19,21 +19,29 @@ public class LoginTab : MonoBehaviour
 
     [Header("LoginUi")]
     [SerializeField] GameObject LoginObj;
+    [SerializeField] Text nameText;
+    [SerializeField] GameObject nameObj;
+
     [SerializeField] Text IdText;
     [SerializeField] Text PasswordText;
 
     [SerializeField] Button LoginBut;
     [SerializeField] GameObject LoginButObj;
 
+    [Header("CreatUi")]
     [SerializeField] Button creatBut;
     [SerializeField] GameObject creatButObj;
     //[SerializeField] Toggle AutoLogin;
     //IEnumerator Laoding;
     string IDKey;
     string UserPassKey;
+    string NameKey;
     bool isLogin = false;
     private void Awake()
     {
+        LoginObj.SetActive(false);
+        DefoltObj.SetActive(true);
+
         creatBut.onClick.AddListener(CreatPrecces);
         LoginBut.onClick.AddListener(LoginPrecces);
 
@@ -43,6 +51,7 @@ public class LoginTab : MonoBehaviour
             LoginObj.SetActive(true);
             LoginButObj.SetActive(true);
             creatButObj.SetActive(false);
+            nameObj.SetActive(false);
 
         });
 
@@ -52,7 +61,7 @@ public class LoginTab : MonoBehaviour
             LoginObj.SetActive(true);
             creatButObj.SetActive(true);
             LoginButObj.SetActive(false);
-            
+            nameObj.SetActive(true);
         });
 
         ErrorUi.SetActive(false);
@@ -188,8 +197,10 @@ public class LoginTab : MonoBehaviour
 
         IDKey = IdText.text;
         UserPassKey = PasswordText.text;
+        NameKey = nameText.text;
 
-        Server.instanse.CountCreat(IDKey,UserPassKey);
+        Server.instanse.AccountCreat(IDKey,UserPassKey);
+        Server.instanse.NameDBPost(IDKey, NameKey);
 
         
         await UniTask.Delay(TimeSpan.FromSeconds(1.0f));

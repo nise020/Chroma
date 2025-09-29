@@ -45,7 +45,7 @@ public class RankingTab : MonoBehaviour
     }
     public async UniTask RankSetting()
     {
-        //Server.instanse.OnBtnConnect();
+        List<RankEntry> ranklist = await Server.instanse.LoadRankData();
 
         pageDataSize = 5;
 

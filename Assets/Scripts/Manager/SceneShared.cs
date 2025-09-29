@@ -158,7 +158,7 @@ public class SceneShared : Manager_Base
         }).Forget();
         Debug.Log("Play");
     }
-    public void RankingOn() 
+    public void RankingUiOn() 
     {
         SceneChangeAsync(RankingScene, LoadSceneMode.Single, async (report) =>
         {

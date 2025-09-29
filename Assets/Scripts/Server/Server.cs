@@ -15,11 +15,17 @@ public partial class Server : MonoBehaviour
     //https<--보안됨
     //string ConnectUrl = "process/dbconnect";
 
-    string LoginUrl = "process/login";
-    string CountCreatUrl = "process/logincreate";
-    string UserId;
-    string Username;
-    string Userpw;
+    //-login-
+    string loginUrl = "process/login";
+    //-logincreate-
+    string accountCreatUrl = "process/logincreate";
+    //-namecreate
+    string nameCreatUrl = "process/namecreate";
+
+
+    public string UserId { get; private set; }
+    public string Username { get; private set; }
+    public string Userpw { get; private set; }
 
     //string DisConnectUrl = "process/dbdisconnect";
     //string UserSelectUrl = "process/userselect";//유저 데이터
@@ -38,19 +44,21 @@ public partial class Server : MonoBehaviour
         }
 
     }
-    public void OnBtnConnect() 
+    //public void OnBtnConnect() 
+    //{
+    //    //StartCoroutine(DBPost(Http+ LoginUrl, "dev"));
+    //}
+    public void AccountCreat(string id, string passward)
     {
-        //StartCoroutine(DBPost(Http+ LoginUrl, "dev"));
-    }
-    public void CountCreat(string id, string passward)
-    {
-        StartCoroutine(CraetDBPost(Http + CountCreatUrl, id, passward));
+        StartCoroutine(CraetDBPost(Http + accountCreatUrl, id, passward));
     }
     public void LoginDBPost(string id, string passward)
     {
-        //SendFormData
-        StartCoroutine(LoginDBPost(Http + LoginUrl, id, passward));
-        //StartCoroutine(SendFormData(Http + CountCreatUrl, id, passward));
+        StartCoroutine(LoginDBPost(Http + loginUrl, id, passward));
+    }
+    public void NameDBPost(string id, string name)
+    {
+        StartCoroutine(NameDBPost(Http + nameCreatUrl, id, name));
     }
     public void MessageOn(JSONNode _json) 
     {
@@ -104,10 +112,10 @@ public partial class Server : MonoBehaviour
 
         if (www.result == UnityWebRequest.Result.Success) 
         {
-            JSONNode node = JSONNode.Parse(www.downloadHandler.text);
-
             string response = www.downloadHandler.text;
             Debug.Log("서버 응답: " + response);
+
+            JSONNode node = JSONNode.Parse(www.downloadHandler.text);
 
             if (node.HasKey("db") || node.HasKey("err")) 
             {
@@ -119,6 +127,7 @@ public partial class Server : MonoBehaviour
             {
                 string dbId = node[i]["id"];
                 string dbPw = node[i]["pw"];
+                string name = node[i]["name"];
 
                 if (dbId == _id) 
                 {
@@ -126,6 +135,7 @@ public partial class Server : MonoBehaviour
                     {
                         UserId = _id;
                         Userpw = _passward;
+                        Username = name;
 
                         loginSuccess = true;
 
@@ -139,6 +149,28 @@ public partial class Server : MonoBehaviour
         if (loginSuccess)
         {
             loginTab.GamePlay();
+        }
+    }
+    IEnumerator NameDBPost(string Url, string _id, string _name)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id", _id);
+        form.AddField("name", _name);
+
+        UnityWebRequest www = UnityWebRequest.Post(Url, form);
+
+        yield return www.SendWebRequest();
+
+        Debug.Log(www.downloadHandler.text);
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            JSONNode node = JSONNode.Parse(www.downloadHandler.text);
+
+            string response = www.downloadHandler.text;
+            Debug.Log("서버 응답: " + response);
+
+           
         }
     }
     IEnumerator CraetDBPost(string url, string id, string password)

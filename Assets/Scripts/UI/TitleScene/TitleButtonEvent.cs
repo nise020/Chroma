@@ -19,7 +19,7 @@ public class TitleButtonEvent : MonoBehaviour
 
     public void Rangking()
     {
-        Shared.Instance.SceneShared.RankingOn();
+        Shared.Instance.SceneShared.RankingUiOn();
     }
 
     public void Quit()
