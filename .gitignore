@@ -9,6 +9,7 @@
 [Aa]ssets/[Ss]cenes/[Ll]ightingData.asset.meta
 [Pp]ackages/[Pp]ackage[Mm]anifest.json.meta
 [Pp]ackages/[Pp]ackage[Rr]esolution.json.meta
+UserSettings/
 
 # Visual Studio / Rider / IDE specific files to ignore
 .vs/
