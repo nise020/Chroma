@@ -45,12 +45,12 @@ public class RankingTab : MonoBehaviour
     }
     public async UniTask RankSetting()
     {
-        //data = await Server.instanse.LoadRankData();
+        data = await Server.instanse.LoadRankData();
 
-        //if (data.Count == 0) 
-        //{
-        //    return;
-        //}
+        if (data.Count == 0)
+        {
+            return;
+        }
 
         pageDataSize = 5;
 

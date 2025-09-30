@@ -56,6 +56,9 @@ public partial class Server : MonoBehaviour
         {
             JSONNode node = JSONNode.Parse(www.downloadHandler.text);
 
+            if (node.Count == 0) 
+            { return null; }
+
             for (int i = 0; i < node.Count; i++) 
             {
                 string dbId = node[i]["id"];

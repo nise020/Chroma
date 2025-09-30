@@ -21,8 +21,8 @@ public class Shared : MonoBehaviour
     public ResourcesManager ResourcesManager { get; set; }
     public LanguageManager LanguageManager { get; set; }
 
-    public bool isReplay = false;
-    public bool isPlay = false;
+    [ReadOnly] public bool isReplay = false;
+    [ReadOnly] public bool isPlay = false;
     private void Awake()
     {
         Instance = this;
