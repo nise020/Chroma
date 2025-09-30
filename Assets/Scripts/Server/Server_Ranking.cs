@@ -23,7 +23,41 @@ public partial class Server : MonoBehaviour
         List<RankEntry> serverData = await RankListLoad(Http + rankDataListLoadUrl);
         return serverData;
     }
+    public async Task<List<RankEntry>> RankListLoad(string url)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(url);
 
+        await www.SendWebRequest();
+
+        List<RankEntry> serverData = new();
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            JSONNode node = JSONNode.Parse(www.downloadHandler.text);
+            Debug.Log("서버 응답: " + www.downloadHandler.text);
+
+            if (node.Count == 0)
+
+            { return null; }
+
+            if (node.IsArray && node.Count > 0)
+            {
+                for (int i = 0; i < node.Count; i++)
+                {
+                    string dbId = node[i];
+                    int dbScore = await ScoreDataLoad(dbId);
+
+                    RankEntry rankEntry = new RankEntry();
+
+                    rankEntry.id = dbId;
+                    rankEntry.score = dbScore;
+
+                    serverData.Add(rankEntry);
+                }
+            }
+
+        }
+        return serverData;
+    }
     public async UniTask SaveRankData(int _newScore)
     {
         beforeScore = await ScoreDataLoad(UserId);
@@ -45,31 +79,7 @@ public partial class Server : MonoBehaviour
         int score = await RankScoreLoad(Http + rankDataScoreLoadUrl, _id);
         return score;
     }
-    public async Task<List<RankEntry>> RankListLoad(string url) 
-    {
-        UnityWebRequest www = UnityWebRequest.Get(url);
-
-        await www.SendWebRequest();
-
-        List<RankEntry> serverData = new();
-        if (www.result == UnityWebRequest.Result.Success)
-        {
-            JSONNode node = JSONNode.Parse(www.downloadHandler.text);
-
-            if (node.Count == 0) 
-            { return null; }
-
-            for (int i = 0; i < node.Count; i++) 
-            {
-                string dbId = node[i]["id"];
-                int dbScore = node[i]["score"];
-
-                serverData[i].id = dbId;
-                serverData[i].score = dbScore;
-            }
-        }
-        return serverData;
-    }
+   
     public async Task<int> RankScoreLoad(string url, string _id)
     {
         int score = 0;

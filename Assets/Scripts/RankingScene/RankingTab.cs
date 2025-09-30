@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,6 +53,8 @@ public class RankingTab : MonoBehaviour
             return;
         }
 
+        data = RankResetting(data);
+
         pageDataSize = 5;
 
         if (rowTemplate)
@@ -71,7 +74,12 @@ public class RankingTab : MonoBehaviour
 
         await UniTask.CompletedTask;
     }
-
+    List<RankEntry> RankResetting(List<RankEntry> _data) 
+    {
+        return _data
+        .OrderByDescending(entry => entry.score)
+        .ToList();
+    }
     void BuildDummy()
     {
         data.Clear();

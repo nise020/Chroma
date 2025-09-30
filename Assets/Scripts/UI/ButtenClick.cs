@@ -18,15 +18,19 @@ public class ButtenClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     RectTransform rectTransform;
     Button Button;
     TMP_Text text;
-    float scaleEventSpeed = 0.5f;
+    float scaleEventSpeed = 1.0f;
     Color textcolor;
     private Coroutine scaleCoroutine;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         Button = GetComponent<Button>();
-        text = GetComponentInChildren<TMP_Text>();
-        textcolor = text.color;
+        if (type == CLICK_TYPE.Color) 
+        {
+            text = GetComponentInChildren<TMP_Text>();
+            textcolor = text.color;
+        }
+        
     }
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -77,7 +81,7 @@ public class ButtenClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private IEnumerator ScaleEffect(bool _check) 
     {
-        float minScale = 0.8f;
+        float minScale = 0.9f;
         float maxScale = 1.0f;
         if (_check)
         {
