@@ -25,6 +25,9 @@ public class LoginTab : MonoBehaviour
     [SerializeField] Text IdText;
     [SerializeField] Text PasswordText;
 
+    [SerializeField] InputField idField;
+    [SerializeField] InputField passwordField;
+
     [SerializeField] Button LoginBut;
     [SerializeField] GameObject LoginButObj;
 
@@ -179,10 +182,13 @@ public class LoginTab : MonoBehaviour
     //}
     public async UniTask LoginOn() 
     {
-        IDKey = IdText.text;
-        UserPassKey = PasswordText.text;
+        //IDKey = IdText.text;
+        //UserPassKey = PasswordText.text;
+        var id = idField.text.Trim();
+        var password = passwordField.text.Trim();
 
-        await Server.instanse.LoginDBPost(IDKey, UserPassKey);
+        await Server.instanse.LoginDBPost(id, password);
+        //await Server.instanse.LoginDBPost(IDKey, UserPassKey);
 
         await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
 
