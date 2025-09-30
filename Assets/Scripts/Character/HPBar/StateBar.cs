@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public partial class StateBar : MonoBehaviour
 {
-    protected Character_Base Character { get; set; } = null;
+    protected Character_Base Character { get; set; }
     [SerializeField] private Image hpImage = null;
     [SerializeField] private Image hpLateImage = null;
     
@@ -12,9 +12,9 @@ public partial class StateBar : MonoBehaviour
 
 
 
-    public Action<int> AttackDamageEvent { get; set; } = null;
+    public Action<int> AttackDamageEvent { get; set; }
     private Coroutine HPBarEvent { get; set; } = null;
-    protected Camera MainCamera { get; set; } = null;
+    protected Camera MainCamera { get; set; }
     protected virtual void Start()
     {
         InitializeImage();

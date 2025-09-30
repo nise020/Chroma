@@ -115,7 +115,11 @@ public abstract class IBasicSkill
         int repeatCount = skillData.skillCountMax;
         float duration = effect.main.duration;
         //EffectSound.Play();
-        EffectSound.PlayOneShot(EffectClip);
+        if (EffectClip != null) 
+        {
+            EffectSound.PlayOneShot(EffectClip);
+        }
+
         try
         {
             while (repeatCount > 0 && !_skillToken.IsCancellationRequested)

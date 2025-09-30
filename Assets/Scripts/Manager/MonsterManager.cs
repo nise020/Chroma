@@ -248,7 +248,18 @@ public class MonsterManager : MonoBehaviour
     {
         GameObject go = GameObject.Find("Ground");
         BoxCollider boxCollider = go.GetComponent<BoxCollider>();
-        Bounds bounds = boxCollider.bounds;
+
+        Bounds bounds;
+        if (boxCollider == null)
+        {
+            MeshCollider meshCollider = go.GetComponent<MeshCollider>();
+            bounds = meshCollider.bounds;
+        }
+        else 
+        {
+            bounds = boxCollider.bounds;
+        }
+
 
         if (nowStageinfo != null)
         {
@@ -278,7 +289,17 @@ public class MonsterManager : MonoBehaviour
     {
         GameObject go = GameObject.Find("Ground");
         BoxCollider boxCollider = go.GetComponent<BoxCollider>();
-        Bounds bounds = boxCollider.bounds;
+
+        Bounds bounds;
+        if (boxCollider == null)
+        {
+            MeshCollider meshCollider = go.GetComponent<MeshCollider>();
+            bounds = meshCollider.bounds;
+        }
+        else
+        {
+            bounds = boxCollider.bounds;
+        }
 
         while (isSpawn)
         {

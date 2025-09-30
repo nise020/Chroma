@@ -67,7 +67,7 @@ public partial class Monster_Base : Character_Base
     public ParticleSystem deathEffect { get; set; }
     public ParticleSystem SpownEffect { get; set; }
 
-    protected StateBar StateBar { get; set; } = new();
+    protected StateBar StateBar { get; set; }
 
 
 

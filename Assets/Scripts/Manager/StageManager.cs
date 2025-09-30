@@ -583,6 +583,7 @@ public class StageManager : MonoBehaviour
         GameShard.Instance.GameManager.FadeEvent(SCENE_SCENES.Title, async () =>
         {
             GameShard.Instance.GameUiManager.CanvasDelet();
+            Destroy(GameShard.Instance.followCamera3D.gameObject);
             await UniTask.CompletedTask;
         }).Forget();
     }
