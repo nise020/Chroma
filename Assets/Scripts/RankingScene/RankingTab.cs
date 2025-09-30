@@ -48,21 +48,17 @@ public class RankingTab : MonoBehaviour
     {
         data = await Server.instanse.LoadRankData();
 
-        if (data.Count == 0)
-        {
-            return;
-        }
+        if (data == null || data.Count == 0) return;
 
         data = RankResetting(data);
 
+        myId = Server.instanse != null ? Server.instanse.UserId : myId;
+
         pageDataSize = 5;
 
-        if (rowTemplate)
-            rowTemplate.gameObject.SetActive(false);
+        if (rowTemplate) rowTemplate.gameObject.SetActive(false);
 
-        //BuildDummy(); //Create DummyData <- Not server
-
-        var me = data.Find(e => e.id == myId) ?? data[0];
+        var me = data.Find(e => e.id == myId);
         if (myRank) 
             myRank.Set(me);
 
@@ -74,12 +70,21 @@ public class RankingTab : MonoBehaviour
 
         await UniTask.CompletedTask;
     }
+
     List<RankEntry> RankResetting(List<RankEntry> _data) 
     {
-        return _data
-        .OrderByDescending(entry => entry.score)
-        .ToList();
+        var sorted = _data
+            .OrderByDescending(entry => entry.score)
+            .ToList();
+
+        for (int i = 0; i < sorted.Count; i++)
+        {
+            sorted[i].rank = i + 1;
+        }
+
+        return sorted;
     }
+
     void BuildDummy()
     {
         data.Clear();
