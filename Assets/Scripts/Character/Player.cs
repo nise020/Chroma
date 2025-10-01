@@ -280,19 +280,19 @@ public partial class Player : Character_Base
         }
 
         move(moveDir);
-
-        if (rg != null) 
-        {
-            GravityOperations();
-
-            //Vector3 horizontalVelocity = moveDir * StatusData[CHARACTER_STATUS.Speed];
-
-            //Velocity.x = horizontalVelocity.x;
-            //Velocity.z = horizontalVelocity.z;
-
-            rg.linearVelocity = Velocity;
-        }
+        GravityOperations();
         moveDir = Vector3.zero;
+        //if (rg != null) 
+        //{
+        //    GravityOperations();
+
+        //    //Vector3 horizontalVelocity = moveDir * StatusData[CHARACTER_STATUS.Speed];
+
+        //    //Velocity.x = horizontalVelocity.x;
+        //    //Velocity.z = horizontalVelocity.z;
+
+        //    rg.linearVelocity = Velocity;
+        //}
     }
 
     public void SkillChange(int _value, SKILL_ID_TYPE _type) 

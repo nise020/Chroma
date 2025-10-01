@@ -368,6 +368,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8263841844117363765, guid: 8538f77998817e646a29432c00404625, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -760,7 +784,6 @@ MonoBehaviour:
     m_Bits: 0
   IsPaused: 0
   IsSturn: 0
-  isJump: 0
   WeaponObj: {fileID: 3673247851949665992}
   FootObj: {fileID: 0}
   IsOnWalkable: 0
@@ -815,7 +838,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!195 &5995361920596261323
 NavMeshAgent:
   m_ObjectHideFlags: 0

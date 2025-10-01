@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Not Found acount
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fc603ab0882d56b438ad2869d25fc282, type: 2}
+  m_sharedMaterial: {fileID: 659492623730818300, guid: fc603ab0882d56b438ad2869d25fc282, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2979,6 +2979,8 @@ MonoBehaviour:
   nameObj: {fileID: 3505472024994831191}
   IdText: {fileID: 446993740283071645}
   PasswordText: {fileID: 5714341615355314331}
+  idField: {fileID: 6247900676350937620}
+  passwordField: {fileID: 4682123692424173972}
   LoginBut: {fileID: 6097733673418042236}
   LoginButObj: {fileID: 3609230961022794554}
   creatBut: {fileID: 6913285479073599991}

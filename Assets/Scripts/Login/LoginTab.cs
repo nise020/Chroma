@@ -100,21 +100,7 @@ public class LoginTab : MonoBehaviour
         //    return;
         //}
     }
-    public IEnumerator TextEvent(GameObject _ui)
-    {
-        _ui.SetActive(true);
-        TMP_Text text = _ui.GetComponent<TMP_Text>();
-        Color color = text.color;
-        color.a = 255;
 
-        while (color.a <= 0)
-        {
-            color.a -= 0.1f * Time.deltaTime;
-            yield return null;
-        }
-
-        _ui.SetActive(false);
-    }
 
     public void ToggleEvent() 
     {
@@ -132,6 +118,44 @@ public class LoginTab : MonoBehaviour
     {
         return PlayerPrefs.GetInt(_Key);
     }
+    public void ErrorMessege(string _text)
+    {
+        if (errorEvent != null) StopCoroutine(errorEvent);
+        errorEvent = StartCoroutine(TextEvent(ErrorUi,_text));
+
+        //ErrorUi.SetActive(true);
+    }
+    public IEnumerator TextEvent(GameObject _ui, string _text)
+    {
+        TMP_Text text = _ui.GetComponent<TMP_Text>();
+        text.text = _text;
+
+        Color color = text.color;
+        color.a = 1f;
+        text.color = color;
+
+        _ui.SetActive(true);
+        float displayTime = 2f;
+        yield return new WaitForSeconds(displayTime);
+
+        float fadeDuration = 1f; 
+        float startTime = Time.time;
+
+        while (Time.time < startTime + fadeDuration)
+        {
+            float elapsed = Time.time - startTime;
+            color.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+
+            text.color = color; 
+            yield return null;
+        }
+
+        color.a = 0f;
+        text.color = color;
+
+        _ui.SetActive(false);
+        errorEvent = null;
+    }
     public async UniTask PlayingHistorygSave(string _Key, int _Value)
     {
         PlayerPrefs.SetInt(_Key, _Value);
@@ -141,7 +165,8 @@ public class LoginTab : MonoBehaviour
     public void CreatPrecces()
     {
         if ((IdText.text == "" || IdText.text.Length <= 0) &&
-            (PasswordText.text == "" || PasswordText.text.Length <= 0)) return;
+            (PasswordText.text == "" || PasswordText.text.Length <= 0)&&
+            (nameText.text == "" || nameText.text.Length <= 0)) return;
 
         CreatPassword().Forget();
     }

@@ -58,7 +58,7 @@ public partial class Monster_Base : Character_Base
     
     public MONSTER_ATTACK_TYPE Attack_Type = MONSTER_ATTACK_TYPE.None;
 
-   
+    protected bool isFalling = false;
     protected MonsterWeapon MainWeapon { get; set; }
     protected List<GameObject> WeaponObjectList = new List<GameObject>();
     protected Dictionary<GameObject, bool> WeaponCheckDatas = new Dictionary<GameObject, bool>();
@@ -173,12 +173,52 @@ public partial class Monster_Base : Character_Base
 
     protected virtual void Update()
     {
-        if (isJump) return;
+        if (IsJumping) 
+        {
+            Velocity.y = 0f;
+            return;
+        }
         GravityOperations();
-        if (rg) 
-            rg.linearVelocity = Velocity;
+        //if (rg) 
+        //    rg.linearVelocity = Velocity;
     }
 
+
+    protected override void GravityOperations()
+    {
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
+        IsGrounded = Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hitInfo1, GroundDistance, GroundMask);
+        IsDeathed = Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hitInfo2, GroundDistance, DeathMask);
+
+        if (IsDeathed)
+        {
+            if (Velocity.y < 0f) Velocity.y = -1f;
+
+            HpUpdate(0.0f);
+            IsPaused = true;
+        }
+        else if (IsGrounded)
+        {
+            //isFalling = false;
+            //if (isFalling)
+            //{
+            //    if (NavMesh.SamplePosition(rg.position, out NavMeshHit navHit, 2.0f, NavMesh.AllAreas))
+            //    {
+            //        Agent.Warp(navHit.position);
+            //    }
+            //    isFalling = false;
+            //}
+
+            if (Velocity.y < 0f) Velocity.y = -1f;
+        }
+        else
+        {
+            // 중력 적용
+            Velocity.y += Gravity * Time.deltaTime;
+        }
+
+        rg.linearVelocity = Velocity;
+    }
     protected void skillDataAdd()
     {
         for (int i = 0; i < SkillType.Count; i++)

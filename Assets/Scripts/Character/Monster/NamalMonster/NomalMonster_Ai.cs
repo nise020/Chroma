@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
@@ -33,13 +34,39 @@ public partial class NomalMonster : Monster_Base
 
     public override void AI_TargetChase(Vector3 _pos, float _distance)
     {
+        if (isFalling)
+        {
+            if (Agent.enabled) Agent.enabled = false;
+
+            rg.MovePosition(rg.position + transform.forward * Time.deltaTime * 2.0f);
+            float rayLength = 0.1f;
+
+            if (Physics.Raycast(rg.position, Vector3.down, rayLength, GroundMask))
+            {
+                isFalling = false; 
+                Agent.enabled = true; 
+            }
+            return;
+        }
+
         AnimationParameterUpdate(ANIMATION_PATAMETERS_TYPE.Walk, true);
+
+        //Agent<- navMesh Agent
+
+        Vector3 forwardCheck = rg.position + transform.forward * 0.5f;
+
+        if (!NavMesh.SamplePosition(forwardCheck, out NavMeshHit hit, 0.3f, NavMesh.AllAreas))
+        {
+            Agent.enabled = false;
+            isFalling = true;
+            rg.MovePosition(rg.position + transform.forward * Time.deltaTime * 2.0f);
+            return;
+        }
 
         Agent.nextPosition = rg.position;
         Agent.SetDestination(_pos);
-        //Agent<- navMesh Agent
+        Agent.isStopped = false;
         Vector3 velocity = Agent.desiredVelocity;
-        //rg.MovePosition(rg.position + velocity * Time.deltaTime);
         rg.MovePosition(rg.position + velocity * Time.deltaTime);
 
         if (velocity.sqrMagnitude > 0.01f) 

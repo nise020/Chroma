@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 using static Enums.CHARACTER_DATA;
@@ -46,7 +47,7 @@ public abstract partial class Character_Base : MonoBehaviour
     [SerializeField, ReadOnly] protected Vector3 Velocity = Vector3.zero;
     [SerializeField, ReadOnly] protected float Gravity = -9.81f;
     [SerializeField, ReadOnly] protected float JumpGravity = -9.81f;
-    [SerializeField, ReadOnly] protected bool IsJumping = false;
+    [SerializeField, ReadOnly] public bool IsJumping = false;
     [SerializeField, ReadOnly] protected float GroundDistance = 0.5f;
     [SerializeField, ReadOnly] protected LayerMask GroundMask;
 
@@ -60,7 +61,6 @@ public abstract partial class Character_Base : MonoBehaviour
     [Header("Controll")]
     [ReadOnly] public bool IsPaused = false;
     [ReadOnly] public bool IsSturn = false;
-    [ReadOnly] public bool isJump = false;
 
     [SerializeField] protected GameObject WeaponObj;
     [SerializeField] protected GameObject FootObj;
@@ -190,7 +190,7 @@ public abstract partial class Character_Base : MonoBehaviour
         }
         AnimationParameterUpdate(KnockBack, false);
     }
-    protected void GravityOperations()
+    protected virtual void GravityOperations()
     {
         ///GroundMask = LayerMask.GetMask(LAYER_TYPE.Walkable.ToString());
         //GroundMask = LayerMask.GetMask(LAYER_TYPE.Forest.ToString());
@@ -202,10 +202,7 @@ public abstract partial class Character_Base : MonoBehaviour
 
         if (IsDeathed) 
         {
-            if (Velocity.y < 0f)
-            {
-                Velocity.y = -1f;
-            }
+            if (Velocity.y < 0f) Velocity.y = -1f;
 
             HpUpdate(0.0f);
             IsPaused = true;
@@ -213,19 +210,16 @@ public abstract partial class Character_Base : MonoBehaviour
         }
         else if (IsGrounded)
         {
-            if (Velocity.y < 0f)
-            {
-                Velocity.y = -1f;
-            }
+            if (Velocity.y < 0f) Velocity.y = -1f;
         }
         else
         {
             //IsPaused = true;
             Velocity.y += Gravity * Time.deltaTime;
         }
-        //rg.linearVelocity = Velocity;
+        rg.linearVelocity = Velocity;
     }
-
+    
     public virtual void SkillEventOn(int value) //Event, 1 == skill1
     {
 

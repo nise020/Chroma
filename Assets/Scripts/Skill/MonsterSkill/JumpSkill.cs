@@ -42,7 +42,8 @@ public class JumpSkill : IBasicSkill
         float moveSpeed = speed;
         float moveTime = Mathf.Max(distance / moveSpeed, 0.2f);
 
-        CHARECTER.isJump = true;
+        CHARECTER.IsJumping = true;
+        rd.isKinematic = true;
 
         while (elapsed < moveTime)
         {
@@ -61,7 +62,16 @@ public class JumpSkill : IBasicSkill
             await UniTask.Yield();
         }
 
-        CHARECTER.isJump = false;
+        if (rd)
+        {
+            // Rigidbody의 선형 속도를 0으로 설정하여 모든 관성을 즉시 제거
+            rd.linearVelocity = Vector3.zero;
+            // 캐릭터 컴포넌트 내부의 Velocity도 초기화
+            rd.linearVelocity = Vector3.zero;
+        }
+        rd.isKinematic = false;
+
+        CHARECTER.IsJumping = false;
         SkillOn(_defender);
     }
 
