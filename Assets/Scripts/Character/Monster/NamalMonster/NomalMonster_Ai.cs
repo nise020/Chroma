@@ -37,8 +37,9 @@ public partial class NomalMonster : Monster_Base
         if (isFalling)
         {
             if (Agent.enabled) Agent.enabled = false;
+            Vector3 target = (_pos - transform.position).normalized;
 
-            rg.MovePosition(rg.position + transform.forward * Time.deltaTime * 2.0f);
+            rg.MovePosition(rg.position + target * Time.deltaTime * 2.0f);
             float rayLength = 0.1f;
 
             if (Physics.Raycast(rg.position, Vector3.down, rayLength, GroundMask))

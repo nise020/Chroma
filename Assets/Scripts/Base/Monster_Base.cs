@@ -199,15 +199,6 @@ public partial class Monster_Base : Character_Base
         }
         else if (IsGrounded)
         {
-            //isFalling = false;
-            //if (isFalling)
-            //{
-            //    if (NavMesh.SamplePosition(rg.position, out NavMeshHit navHit, 2.0f, NavMesh.AllAreas))
-            //    {
-            //        Agent.Warp(navHit.position);
-            //    }
-            //    isFalling = false;
-            //}
 
             if (Velocity.y < 0f) Velocity.y = -1f;
         }
