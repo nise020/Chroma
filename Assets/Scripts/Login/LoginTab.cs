@@ -215,7 +215,7 @@ public class LoginTab : MonoBehaviour
         await Server.instanse.LoginDBPost(id, password);
         //await Server.instanse.LoginDBPost(IDKey, UserPassKey);
 
-        await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
+        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
 
         //Shared.Instance.isPlay = true;
 

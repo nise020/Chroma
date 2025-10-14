@@ -1,0 +1,7 @@
+1. AssetsData,TMP를 다운 받아서 원래 위치에 넣어주세요
+https://drive.google.com/drive/folders/1llfKelV_DuEuU1oHspHxitfccXoDAyXV?usp=drive_link
+
+2. Unitask를 사용했기 때문에 에러가 안나기 위해서라도 Git을 설치해 주세요
+
+3. 프로젝트의 저장위치를 한번 옮겨서 커밋한 내역들이 깃허브에 남겨 있지 않습니다
+따라서 커밋한 내역들을 따로 txt 파일에 저장 시켰습니다.

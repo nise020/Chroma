@@ -30,7 +30,10 @@ public partial class PlayerStateBar : StateBar
             case 1: SkillSprite(Skill_1Image, _id); break; // space
             case 2: SkillSprite(Skill_2Image, _id); break; // Q
             case 3: SkillSprite(Skill_3Image, _id); break; // E
-            case 4: SkillSprite(Skill_4Image, _id); break; // R
+
+            case 4: SkillSprite(Skill_4Image, _id);
+                Skill_4_Back_Image.sprite = Skill_4Image.sprite;
+                break; // R
             default:  break;
         }
     }

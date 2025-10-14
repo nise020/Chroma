@@ -15,7 +15,7 @@ Id,Type,Value,ValueMax,Time,BuffId,Range,HitCount,SkillCountMax,Icon,Prefab,Name
 32,3,120,150,20,1001,4,3,2,JumpSkill2,Prefab/Effect/Skill/Sword Slash 7,527,528,4,10001
 33,3,140,170,30,1001,4,4,3,JumpSkill3,Prefab/Effect/Skill/Sword Slash Combo 1,529,530,8,10001
 34,3,160,180,30,1001,4,4,3,JumpSkill4,Prefab/Effect/Skill/Sword Slash Combo 1,531,532,12,10001
-41,3,100,130,30,1001,2,1,1,Special1,Prefab/Effect/Skill/Sword Slash 13,533,534,3,10001
+41,3,100,130,30,1001,2,1,1,Special1,Prefab/Effect/Skill/Sword Slash 10,533,534,3,10001
 42,3,120,150,30,1001,4,1,1,Special2,Prefab/Effect/Skill/Spatial section,535,536,6,10001
 43,3,140,170,40,1001,2,1,1,Special3,Prefab/Effect/Skill/Sword Slash 16,537,538,9,10001
 44,3,160,180,40,1001,3,1,1,Special4,Prefab/Effect/Skill/Sword Slash Combo 8,539,540,12,10001

@@ -28,7 +28,7 @@ public class GameShard : MonoBehaviour
         StageManager = null;
         InputManager = null;
         GameUiManager = null;
-        Destroy(followCamera3D.gameObject);
+        //Destroy(followCamera3D.gameObject);
     }
 
     private void Awake()

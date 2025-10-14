@@ -22,6 +22,7 @@ public partial class PlayerStateBar : StateBar
     [SerializeField] private TMP_Text Skill_3Text = null;
 
     [SerializeField] private Image Skill_4Image = null;
+    [SerializeField] private Image Skill_4_Back_Image = null;
     [SerializeField] private TMP_Text BurstText = null;
 
     [Header("HpText")]

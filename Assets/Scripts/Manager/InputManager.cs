@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     public bool isUIOpen = false;
     public bool isMouse = false;
     public bool isFade;
+    public bool isPlay = false;
 
 
 
@@ -60,6 +61,11 @@ public class InputManager : MonoBehaviour
     public void inputEvent()
     {
         if (isFade) { return; }
+        if (!isPlay) 
+        {
+            Cursor.lockState = CursorLockMode.None;
+            return; 
+        }
         //Queue.Add(Input)
         UiButtonInput();
         PlayerInput();

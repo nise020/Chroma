@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class ShakeCamera : MonoBehaviour

@@ -62,7 +62,7 @@ public class StageManager : MonoBehaviour
 
     public bool CanUseConsumables() => !IsIntermission && isPlayerAlive;
 
-    [SerializeField, ReadOnly] private float stagePlayTime = 30f; // 스테이지당 시간
+    [SerializeField, ReadOnly] private float stagePlayTime = 120f; // 스테이지당 시간
     private float remainStage;
     public Action<float> OnSurviveTimeUpdate;
     public Action<float> OnStageRemainTimeUpdate;
@@ -583,6 +583,7 @@ public class StageManager : MonoBehaviour
         GameShard.Instance.GameManager.FadeEvent(SCENE_SCENES.Title, async () =>
         {
             GameShard.Instance.GameUiManager.CanvasDelet();
+            GameShard.Instance.InputManager.isPlay = false;
             Destroy(GameShard.Instance.followCamera3D.gameObject);
             await UniTask.CompletedTask;
         }).Forget();

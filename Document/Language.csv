@@ -59,42 +59,42 @@ Id,Ko,En
 331,포션 없이 클리어 IV,Potionless IV
 332,포션을 사용하지 않고 스테이지4를 클리어하세요.,Clear Stage4 without using any potions
 501,일반공격1,NomalAttack_1
-502,전방을 향해 공격을 한다,"""Unleashes a powerful strike forward."""
+502,전방을 향해 공격을 실행합니다.,"""Unleashes a powerful strike forward."""
 503,일반공격2,NomalAttack_2
-504,설명,"""Unleashes a powerful strike forward."""
+504,전방을 향해 공격을 실행합니다.,"""Unleashes a powerful strike forward."""
 505,일반공격3,Normal_Attack3
-506,설명,"""Unleashes a powerful strike forward and then gains an Attack Power buff."""
+506,전방을 향해 공격을 실행합니다.,"""Unleashes a powerful strike forward."""
 507,일반공격4,Normal_Attack4
-508,설명,"""Unleashes a powerful strike forward and then gains an Attack Power buff."""
+508,전방을 향해 공격을 실행합니다.,"""Unleashes a powerful strike forward."""
 509,돌진 공격1,Dash1
-510,설명,"""Charges forward and striking all enemies in the path."""
+510,전방을 향해 돌진 공격을 실행합니다.,"""Charges forward and striking all enemies in the path."""
 511,돌진 공격2,Dash2
-512,설명,"""Charges forward and striking all enemies in the path."""
+512,전방을 향해 돌진 공격을 실행합니다. ,"""Charges forward and striking all enemies in the path."""
 513,돌진 공격3,Dash3
-514,설명,"""Charges forward and striking all enemies in the path and then gains a Movement Speed buff."""
+514,전방을 향해 돌진 공격을 실행합니다. 그 이후 일정시간 동안 이동속도가 증가합니다.,"""Charges forward and striking all enemies in the path and then gains a Movement Speed buff."""
 515,돌진 공격4,Dash4
-516,설명,"""Charges forward and striking all enemies in the path and then gains a Movement Speed buff."""
+516,전방을 향해 돌진 공격을 실행합니다. 그 이후 일정시간 동안 이동속도가 증가합니다.,"""Charges forward and striking all enemies in the path and then gains a Movement Speed buff."""
 517,범위공격1,Area1
-518,설명,"""Deals 2 damage to all nearby enemies around the user."""
+518,사용자 주변에 적에게 2번의 공격을 실행합니다.,"""Deals 2 damage to all nearby enemies around the user."""
 519,범위공격2,Area2
-520,설명,"""Deals 3 damage to all nearby enemies around the user."""
+520,사용자 주변에 적에게 3번의 공격을 실행합니다.,"""Deals 3 damage to all nearby enemies around the user."""
 521,범위공격3,Area3
-522,설명,"""Deals 3 damage to all nearby enemies around the user."""
+522,사용자 주변에 적에게 3번의 공격을 실행합니다.,"""Deals 3 damage to all nearby enemies around the user."""
 523,범위공격4,Area4
-524,설명,"""Deals 4 damage to all nearby enemies around the user."""
+524,사용자 주변에 적에게 4번의 공격을 실행합니다.,"""Deals 4 damage to all nearby enemies around the user."""
 525,자동공격1,Auto1
-526,설명,Creates two slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
+526,일정 범위 내의 적을 2회 공격하는 검격을 총 2회 생성합니다. \n 스킬이 종료되면 사용자는 짧은 시간 동안 공격력 버프를 얻게 됩니다.,Creates two slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
 527,자동공격2,Auto2
-528,설명,Creates two slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
+528,일정 범위 내의 적을 2회 공격하는 검격을 총 2회 생성합니다. \n 스킬이 종료되면 사용자는 짧은 시간 동안 공격력 버프를 얻게 됩니다.,Creates two slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
 529,자동공격3,Auto3
-530,설명,Creates three slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
+530,일정 범위 내의 적을 3회 공격하는 검격을 총 3회 생성합니다. \n 스킬이 종료되면 사용자는 짧은 시간 동안 공격력 버프를 얻게 됩니다.,Creates three slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
 531,자동공격4,Auto4
-532,설명,Creates three slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
+532,일정 범위 내의 적을 3회 공격하는 검격을 총 3회 생성합니다. \n 스킬이 종료되면 사용자는 짧은 시간 동안 공격력 버프를 얻게 됩니다.,Creates three slashes that each strike enemies within a certain range three times. After the skill ends the user gains an Attack Power buff for a short duration.
 533,필살기1,Burst_1
-534,설명,They attack the surrounding enemies in a circle around the user
+534,사용자 원을 그리듯 주변 적에게 강력한 공격을 사용합니다.,They attack the surrounding enemies in a circle around the user
 535,필살기2,Burst_2
-536,설명,Hit the enemy around the user with a powerful attack of four times
+536,사용자 주변의 적들에게 4회의 강력한 공격을 실행합니다.,Hit the enemy around the user with a powerful attack of four times
 537,필살기3,Burst_3
-538,설명,Hit a huge sword at the user's location and attack the surrounding enemy
+538,사용자 위치에 거대한 검을 내리꽃아 주변 적들에게 피해를 줍니다.,Hit a huge sword at the user's location and attack the surrounding enemy
 539,필살기4,Burst_4
-540,설명,3 consecutive attacks based on the front of the user
+540,사용자의 정면을 향해 3회의 공격을 실행합니다.,3 consecutive attacks based on the front of the user

@@ -101,7 +101,7 @@ public class SceneShared : Manager_Base
         //        await SceneManager.UnloadSceneAsync(titleScene);
         //}
 
-        //4.로딩씬 제거
+        //4.Loding Scene Delete
 
         //if (onDone != null)  await onDone();
 
@@ -190,6 +190,8 @@ public class SceneShared : Manager_Base
         await UniTask.WaitUntil(() => GameShard.Instance != null);
 
         await GameShard.Instance.GameStart();
+
+        GameShard.Instance.InputManager.isPlay = true;
 
         var table = Shared.Instance.DataManager.Stage_Table.Get((int)STAGE.Stage1);
         await Shared.Instance.SoundManager.BgmPlayerSetting(table.SoundId);
