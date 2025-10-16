@@ -44,7 +44,7 @@ public class InvisibleShieldSkill : IBasicSkill
         isShieldActive = true;
         isHitBlocked = false;
 
-        player.SetShieldBlockFunc(ConsumeShield);
+        //player.SetShieldBlockFunc(ConsumeShield);
  
         yield return new WaitForSeconds(0.3f);
 
@@ -69,7 +69,7 @@ public class InvisibleShieldSkill : IBasicSkill
     {
         Debug.Log("Shield End");
         isShieldActive = false;
-        player.RemoveShieldBlockFunc();
+        //player.RemoveShieldBlockFunc();
     }
     public override void TriggerOut() { }
     public override void OnUpdate() { }

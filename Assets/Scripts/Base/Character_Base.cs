@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.AI;
 using static Enums;
@@ -12,64 +13,97 @@ public abstract partial class Character_Base : MonoBehaviour
     public CHARACTER_CONDITION_STATE ConditionState { get; set; } = CHARACTER_CONDITION_STATE.Default;
     //protected Dictionary<CHARACTER_STATUS_TYPE, object> Status { get; set; } = new();
     //protected StateBar StateBar { get; set; } = new();
-    public virtual void HpBarInit(StateBar _hpBar) { }
+    public virtual void HpBarInit(UIStateBar _hpBar) { }
 
-    StateBar stateBar { get; set; }
-    protected Animator CharacterAnimator { get; set; } = null;
+    //UIStateBar stateBar { get; set; }
+    protected Animator CharacterAnimator { get; set; }
     public Action<float, float> HpBarChanged { get; set; }
 
     public Action<bool> AttackEvent { get; set; }
 
-    protected bool DamageColliderCheck = false;
+    protected bool DamageColliderCheck { get; set; }
 
-    protected bool DamageMaterialCheck = false;
+    protected bool DamageMaterialCheck { get; set; }
 
     protected Transform modelTrans;
 
-    protected float RotateSpeed { get; set; } = 5.0f;
+    protected float RotateSpeed { get; set; }
 
-    protected BasicSkillSystem basicSkillSystem = new ();
+    protected BasicSkillSystem basicSkillSystem { get; set; }
     public void SkillInit(BasicSkillSystem basicSkill) => basicSkillSystem = basicSkill;
-    public Dictionary<CHARACTER_DATA, string> PathData { get; protected set; } = new();
-    public Dictionary<CHARACTER_STATUS, float> StatusData { get; protected set; } = new();
-    public Dictionary<CHARACTER_DATA, float> InfoData { get; protected set; } = new();
-    public Dictionary<int, ParticleSystem> SkillData { get; protected set; } = new();
-    public Dictionary<string, bool> StateCheckData { get; protected set; } = new();
+    public Dictionary<CHARACTER_DATA, string> PathData { get; protected set; } 
+    public Dictionary<CHARACTER_STATUS, float> StatusData { get; protected set; } 
+    public Dictionary<CHARACTER_DATA, float> InfoData { get; protected set; } 
+    public Dictionary<int, ParticleSystem> SkillData { get; protected set; }
+    public Dictionary<string, bool> StateCheckData { get; protected set; } 
 
     //public int CharacterId;
     public CHARACTER_ID IdType;//Test
 
-    
-    protected Dictionary<int, SKILL_ID_TYPE> SkillKeyWardData = new Dictionary<int, SKILL_ID_TYPE>();
+    protected Dictionary<int, SKILL_ID_TYPE> SkillKeyWardData { get; set; }
 
     [Header("Gravity")]
-    [SerializeField,ReadOnly] protected bool IsGrounded = false;
-    [SerializeField, ReadOnly] protected Vector3 Velocity = Vector3.zero;
-    [SerializeField, ReadOnly] protected float Gravity = -9.81f;
-    [SerializeField, ReadOnly] protected float JumpGravity = -9.81f;
-    [SerializeField, ReadOnly] public bool IsJumping = false;
-    [SerializeField, ReadOnly] protected float GroundDistance = 0.5f;
-    [SerializeField, ReadOnly] protected LayerMask GroundMask;
+    [ReadOnly] protected bool IsGrounded;
+    [ReadOnly] protected Vector3 Velocity ;
+    [ReadOnly] protected float Gravity;
+    [ReadOnly] protected float JumpGravity;
+    [ReadOnly] public bool IsJumping;
+    [ReadOnly] protected float GroundDistance;
+    [ReadOnly] protected LayerMask GroundMask;
 
-    [SerializeField,ReadOnly] protected bool IsDeathed = false;
-    [SerializeField, ReadOnly] protected LayerMask DeathMask;
+    [ReadOnly] protected bool IsDeathed;
+    [ReadOnly] protected LayerMask DeathMask;
 
-    public BuffSystem BuffSystem { get; protected set; } = new();
-    protected Rigidbody rg { get; set; } = null;
+    public BuffSystem BuffSystem { get; protected set; }
+    protected Rigidbody rg { get; set; }
     //public PLAYER_DEBUFF Debuff = PLAYER_DEBUFF.None;
 
     [Header("Controll")]
-    [ReadOnly] public bool IsPaused = false;
-    [ReadOnly] public bool IsSturn = false;
+    [ReadOnly] public bool IsPaused;
+    [ReadOnly] public bool IsSturn;
 
     [SerializeField] protected GameObject WeaponObj;
     [SerializeField] protected GameObject FootObj;
-    protected Dictionary<int, AudioClip> SoundDatas = new Dictionary<int, AudioClip>();
+    protected Dictionary<int, AudioClip> SoundDatas { get; set; }
     protected AudioSource WeaponSoundPlayer;
     protected AudioSource CharacterSoundPlayer;
     [ReadOnly] public bool IsOnWalkable = false;
     [ReadOnly] public bool IsOnForest = false;
 
+    protected virtual void Claer() 
+    {
+        PathData = new();
+        StatusData = new();
+        InfoData  = new();
+        SkillData = new();
+        StateCheckData  = new();
+        SkillKeyWardData = new Dictionary<int, SKILL_ID_TYPE>();
+        SoundDatas = new Dictionary<int, AudioClip>();
+        DamageColliderCheck = false;
+
+        DamageMaterialCheck = false;
+
+        RotateSpeed = 5.0f;
+
+        IsPaused = false;
+        IsSturn = false;
+
+        BuffSystem = new();
+        if (basicSkillSystem == null) 
+        {
+            basicSkillSystem = new();
+
+        }
+
+        IsGrounded = false;
+        Velocity = Vector3.zero;
+        Gravity = -9.81f;
+        JumpGravity = -9.81f;
+        IsJumping = false;
+        GroundDistance = 0.5f;
+
+        IsDeathed = false;
+    }
     protected virtual void Awake()
     {
         //BuffSystem.Init(this);

@@ -3,10 +3,9 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public partial class PlayerStateBar : StateBar
+public partial class PlayerStateBar : UIStateBar
 {
-    int Level = 1;
-    int LimitLevel = 0;
+
 
     [SerializeField] TextMeshProUGUI level_Text;
     public void LimitLevelCheck(int _id) 

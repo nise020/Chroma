@@ -6,42 +6,43 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
 
-public partial class PlayerStateBar : StateBar
+public partial class PlayerStateBar : UIStateBar
 {
     [Header("ExpImg")]
-    [SerializeField] private Image expImage = null;
+    [SerializeField] private Image expImage;
 
     [Header("Skill")]
-    [SerializeField] private Image Skill_1Image = null;
-    [SerializeField] private TMP_Text Skill_1Text = null;
+    [SerializeField] private Image Skill_1Image;
+    [SerializeField] private TMP_Text Skill_1Text;
 
-    [SerializeField] private Image Skill_2Image = null;
-    [SerializeField] private TMP_Text Skill_2Text = null;
+    [SerializeField] private Image Skill_2Image;
+    [SerializeField] private TMP_Text Skill_2Text;
 
-    [SerializeField] private Image Skill_3Image = null;
-    [SerializeField] private TMP_Text Skill_3Text = null;
+    [SerializeField] private Image Skill_3Image;
+    [SerializeField] private TMP_Text Skill_3Text;
 
-    [SerializeField] private Image Skill_4Image = null;
-    [SerializeField] private Image Skill_4_Back_Image = null;
-    [SerializeField] private TMP_Text BurstText = null;
+    [SerializeField] private Image Skill_4Image;
+    [SerializeField] private Image Skill_4_Back_Image;
+    [SerializeField] private TMP_Text BurstText;
 
     [Header("HpText")]
-    [SerializeField] private Text maxHpText = null;
-    [SerializeField] private Text hpText = null;
+    [SerializeField] private Text maxHpText;
+    [SerializeField] private Text hpText;
 
-    [SerializeField] private Text maxExpText = null;
-    [SerializeField] private Text expText = null;
+    [SerializeField] private Text maxExpText;
+    [SerializeField] private Text expText;
 
     //[SerializeField] public BuffHUD buffHud;
-    private const float maxDuration = 2;
-    public Action<float> ExpUpdateEvent { get; set; } = null;
-    public Action<float> BurstExpUpdateEvent { get; set; } = null;
-    Coroutine burstCharging = null;
+    //private const float maxDuration = 2;
+    [Header("ExpEvent")]
+    public Action<float> ExpUpdateEvent { get; set; }
+    public Action<float> BurstExpUpdateEvent { get; set; }
     public event Action<int> LevelUpEvent;
-    StatTab stateControllUi;
+    Coroutine burstCharging { get; set; }
+    //StatTab stateControllUi;
 
     [Header("ToolTip")]
-    [SerializeField] private GameObject GuidTab = null;
+    [SerializeField] private GameObject GuidTab;
     [SerializeField] List<GameObject> ToolTipPanel;
 
     [Header("Skip")]
@@ -49,19 +50,45 @@ public partial class PlayerStateBar : StateBar
     [SerializeField] Button bOSSoN;
 
     [Header("StatValue")]
-    [ReadOnly] public int currentLevel = 1;
-    [ReadOnly] public float currentExp = 0;
-    [ReadOnly] public float expToLevelUp = 0;
-    [ReadOnly] public float expIncreaseRate = 1.5f;
-    [ReadOnly] public float currentBurst = 0;
-    protected float ExpeffectTime = 1.0f;
+    [ReadOnly] public int currentLevel;
+    [ReadOnly] public float currentExp;
+    [ReadOnly] public float expToLevelUp;
+    [ReadOnly] public float expIncreaseRate;
+    [ReadOnly] public float currentBurst;
+    protected float ExpeffectTime;
 
-    private IEnumerator ExpBarEvent { get; set; } = null;
+    //private IEnumerator ExpBarEvent { get; set; } = null;
     private float targetFill;
 
     public BuffHUD buffHUD;
-    private void Awake()
+
+    int Level;
+    int LimitLevel;
+
+    Dictionary<SKILL_ID_TYPE, SkillData> SkillDatas { get; set; }
+    // Dictionary<SkillKeyType, SkillData> SkillKeyDatas = new Dictionary<SkillKeyType, SkillData>();
+    bool isBurst { get; set; }
+
+    protected override void Clear()
     {
+        base.Clear();
+        Level = 1;
+        isBurst = false;
+        SkillDatas = new();
+
+        currentLevel = 1;
+        currentExp = 0;
+        expToLevelUp = 0;
+        expIncreaseRate = 1.5f;
+        currentBurst = 0;
+        ExpeffectTime = 1.0f;
+
+        burstCharging = null;
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+
         var table = Shared.Instance.DataManager.Skill_Table.SkillTableData;
 
         foreach (var value in table)

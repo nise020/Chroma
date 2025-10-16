@@ -23,27 +23,27 @@ public class ColorStealSkill : IBasicSkill
        //WeaponObj = monster.GetWeaponObj();
         MonsterWeapon monsterWeapon = weapon.GetComponent<MonsterWeapon>();
 
-        if (_defender is Player)
-        {
-            Player player = (Player)_defender;
-            COLOR_TYPE colorType = player.StillColor(out float value);
+        //if (_defender is Player)
+        //{
+        //    Player player = (Player)_defender;
+        //    COLOR_TYPE colorType = player.StillColor(out float value);
 
-            if (colorType == COLOR_TYPE.None)
-            {
-                Debug.LogError($"colorType = {colorType}");
-                return;
-            }
+        //    if (colorType == COLOR_TYPE.None)
+        //    {
+        //        Debug.LogError($"colorType = {colorType}");
+        //        return;
+        //    }
 
-            Color colorValue = GetColor(colorType);
+        //    Color colorValue = GetColor(colorType);
 
-            copyColor = colorValue;
+        //    copyColor = colorValue;
 
-            if (monsterWeapon != null)
-            {
-                monsterWeapon.CopyColor = colorValue;
-            }
-            Debug.Log($"Color Copy = {copyColor}");
-        }
+        //    if (monsterWeapon != null)
+        //    {
+        //        monsterWeapon.CopyColor = colorValue;
+        //    }
+        //    Debug.Log($"Color Copy = {copyColor}");
+        //}
 
     }
 

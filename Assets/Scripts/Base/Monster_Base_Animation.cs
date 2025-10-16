@@ -8,10 +8,7 @@ using System.Collections;
 
 public partial class Monster_Base : Character_Base
 {
-    public void KnockBackEventOut() 
-    {
 
-    }
     public override void KnockBackOn(float _value)
     {
         float knockbackForce = Mathf.Clamp(Mathf.Log10(_value + 1) * 2f, 1f, 10f);

@@ -50,7 +50,7 @@ public partial class BossMonster : Monster_Base
         if (IsPaused) return;
         AI.State();
     }
-    public override void HpBarInit(StateBar _hpBar)
+    public override void HpBarInit(UIStateBar _hpBar)
     {
         StateBar = _hpBar as BossStateBar;
     }

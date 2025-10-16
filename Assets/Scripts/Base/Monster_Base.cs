@@ -16,62 +16,61 @@ public partial class Monster_Base : Character_Base
 
     public override CONFIG_OBJECT_TYPE ObjectType => CONFIG_OBJECT_TYPE.Monster;
     //public Dictionary<CHARACTER_DATA, object> MonsterStatus { get; set; } = new();
-    protected Player Player { get; set; } = null;
+    protected Player Player { get; set; }
 
     protected Transform PlayerTrans { get; set; }
 
-    protected IEnumerator AttackCorutine { get; set; } = null;
+    protected IEnumerator AttackCorutine { get; set; }
 
     
 
 
     //public void StateInit() => infoData = Infos[CHARACTER_DATA.State] as Dictionary<MONSTER_STATE, object>;
-    protected bool AttackDelay { get; set; } = false;//DelayType Only
+    protected bool AttackDelay { get; set; }//DelayType Only
 
-    protected bool ColorState { get; set; } = false;
+    //protected bool ColorState { get; set; } = false;
 
     //public Dictionary<CHARACTER_DATA, object> Infos { get; set; } = new();
-    protected Spawn Spawn { get; set; } = null;
-    protected Vector3 MovePosition { get; set; } = Vector3.zero;
-    protected Vector3 StartPoint { get; set; } = Vector3.zero;
-    protected List<Vector3> MovePositionList { get; set; } = new();
-    protected int SlotCount { get; set; } = 0;
-    protected float StopDistance { get; set; } = 0.2f;
+    protected Spawn Spawn { get; set; }
+    protected Vector3 MovePosition { get; set; }
+    protected Vector3 StartPoint { get; set; } 
+    protected List<Vector3> MovePositionList { get; set; }
+    protected int SlotCount { get; set; }
+    //protected float StopDistance { get; set; } = 0.2f;
 
-    protected float MoveDelrayTimer { get; set; } = 0.0f;
-    protected float MoveDelrayTime { get; set; } = 2.0f;
-    protected float StopDelrayTimer { get; set; } = 0.0f;
-    protected float StopDelrayTime { get; set; } = 2.0f;
-    protected float AttackDelayTimer { get; set; } = 0.0f;
-    protected float AttackDelrayTime { get; set; } = 2.0f;
-    protected int AttackCount { get; set; } = 0;
-    protected int AttackMaxCount { get; set; } = 3;
+    protected float MoveDelrayTimer { get; set; } 
+    protected float MoveDelrayTime { get; set; }
+    protected float StopDelrayTimer { get; set; } 
+    protected float StopDelrayTime { get; set; } 
+    protected float AttackDelayTimer { get; set; } 
+    protected float AttackDelrayTime { get; set; } 
+    //protected int AttackCount { get; set; }
+    //protected int AttackMaxCount { get; set; } 
 
-    protected CancellationTokenSource AttackCTS { get; set; } = null;
-    protected CancellationTokenSource MoveCTS { get; set; } = null;
-    protected CancellationTokenSource DashCTS { get; set; } = null;
-    protected CancellationTokenSource AniEventCTS { get; set; } = null;
-    protected Dictionary<Item, GameObject> DropItemData { get; set; } = new();
+    //protected CancellationTokenSource AttackCTS { get; set; } = null;
+    //protected CancellationTokenSource MoveCTS { get; set; } = null;
+    //protected CancellationTokenSource DashCTS { get; set; } = null;
+    //protected CancellationTokenSource AniEventCTS { get; set; } = null;
+    protected Dictionary<Item, GameObject> DropItemData { get; set; }
 
-    protected List<Item> ITEMLists { get; set; } = new();
+    protected List<Item> ITEMLists { get; set; }
 
-    
     public MONSTER_ATTACK_TYPE Attack_Type = MONSTER_ATTACK_TYPE.None;
 
-    protected bool isFalling = false;
+    protected bool isFalling;
     protected MonsterWeapon MainWeapon { get; set; }
-    protected List<GameObject> WeaponObjectList = new List<GameObject>();
-    protected Dictionary<GameObject, bool> WeaponCheckDatas = new Dictionary<GameObject, bool>();
+    protected List<GameObject> WeaponObjectList { get; set; }
+    protected Dictionary<GameObject, bool> WeaponCheckDatas { get; set; }
     protected Transform Creatab { get; set; }
 
     public ParticleSystem deathEffect { get; set; }
     public ParticleSystem SpownEffect { get; set; }
 
-    protected StateBar StateBar { get; set; }
+    protected UIStateBar StateBar { get; set; }
 
 
 
-    protected Vector3 WeightPos = new Vector3();
+    protected Vector3 WeightPos;
 
     [SerializeField] protected List<SKILL_ID_TYPE> SkillType;
     protected NavMeshAgent Agent { get; set; }
@@ -88,9 +87,39 @@ public partial class Monster_Base : Character_Base
         CharacterSoundPlayer.outputAudioMixerGroup = Shared.Instance.SoundManager.GetMixser(OptionHandler.SOUND.Effect);
         CharacterSoundPlayer.spatialBlend = 1.0f;
     }
+    protected override void Claer()
+    {
+        base.Claer();
 
+        AttackDelay = false;
+
+        MovePositionList = new();
+        MovePosition = new();
+        StartPoint = new();
+
+        WeightPos = new Vector3();
+        isFalling = false;
+        DropItemData = new();
+        ITEMLists = new();
+        WeaponObjectList = new List<GameObject>();
+        WeaponCheckDatas = new Dictionary<GameObject, bool>();
+
+        SlotCount = 0;
+        //StopDistance = 0.2f;
+
+        MoveDelrayTimer = 0.0f;
+        MoveDelrayTime = 2.0f;
+        StopDelrayTimer = 0.0f;
+        StopDelrayTime = 2.0f;
+        AttackDelayTimer = 0.0f;
+        AttackDelrayTime = 2.0f;
+        //AttackCount  = 0;
+        //AttackMaxCount = 3;
+    }
     public void GetData() 
     {
+        Claer();
+
         var Infos = Shared.Instance.DataManager.Character_Table.Get((int)IdType);
         if (Infos != null)
         {

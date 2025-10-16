@@ -13,10 +13,10 @@ public partial class Player : Character_Base
 {
     public Room MyRoom;
     public override CONFIG_OBJECT_TYPE ObjectType => CONFIG_OBJECT_TYPE.Player;
-    protected PlayerStateBar StateBar { get; set; } = new();
+    protected PlayerStateBar StateBar { get; set; }
     //Test
     public BuffHUD buffHUD;
-    public override void HpBarInit(StateBar _hpBar) => StateBar = _hpBar as PlayerStateBar;
+    public override void HpBarInit(UIStateBar _hpBar) => StateBar = _hpBar as PlayerStateBar;
     public Camera mainCamera;
     public Image SkillImg;
     //private Rigidbody rb { get; set; } = null;
@@ -32,10 +32,10 @@ public partial class Player : Character_Base
 
     [SerializeField] public GameObject inventory;
     [SerializeField] public GameObject popupCanvas;
-    private GameObject inventoryObj;
-    public MenuSystem menuSystem;
+    //private GameObject inventoryObj;
+    //public MenuSystem menuSystem;
     //Status
-    Dictionary<PLAYER_DEBUFF, CancellationTokenSource> debuffTimers = new();
+    //Dictionary<PLAYER_DEBUFF, CancellationTokenSource> debuffTimers = new();
 
     // Color Test
     [Header("Color Systems")]
@@ -45,7 +45,7 @@ public partial class Player : Character_Base
 
     public ColorSteal colorSteal;
 
-    [SerializeField] public ColorSlotUI colorSlotUI;
+    //[SerializeField] public ColorSlotUI colorSlotUI;
 
     // Basic Skill
     private Func<bool> shieldBlockFunc;
@@ -321,9 +321,12 @@ public partial class Player : Character_Base
     }
     public void ApplyData(Player _player, FollowCamera3D _followCamera)
     {
+        base.Claer();
+
         rg = GetComponent<Rigidbody>();
         viewcam = _followCamera;
         CharacterAnimator = GetComponent<Animator>();
+
         basicSkillSystem.Init(this);
         BuffSystem = new BuffSystem();
         BuffSystem.Init(this);
@@ -404,10 +407,10 @@ public partial class Player : Character_Base
     
     public override void HpUpdate(float _hp)
     {
-        if (TryShieldBlock())
-        {
-            return;
-        }
+        //if (TryShieldBlock())
+        //{
+        //    return;
+        //}
 
         float prevHp = 0f;
         if (StatusData.TryGetValue(CHARACTER_STATUS.Hp, out float cur)) 
@@ -430,37 +433,37 @@ public partial class Player : Character_Base
 
     }
 
-    public COLOR_TYPE StillColor(out float imageFill)
-    {
-        float vlaue  = 0;
+    //public COLOR_TYPE StillColor(out float imageFill)
+    //{
+    //    float vlaue  = 0;
 
-        COLOR_TYPE type = colorSlotUI.LoadSlotImage(out vlaue);
+    //    COLOR_TYPE type = colorSlotUI.LoadSlotImage(out vlaue);
 
-        if (vlaue == 1.0f && basicSkillSystem.SkillActive(SKILL_ID_TYPE.BrokenLight)) 
-        {
-            Debug.Log($"BrokenLight Animation start");
-            //AnimationParameterUpdate(PLAYER_ANIMATION_PATAMETERS_TYPE.BrokenLight, true);
-        }
-        imageFill = vlaue;
+    //    if (vlaue == 1.0f && basicSkillSystem.SkillActive(SKILL_ID_TYPE.BrokenLight)) 
+    //    {
+    //        Debug.Log($"BrokenLight Animation start");
+    //        //AnimationParameterUpdate(PLAYER_ANIMATION_PATAMETERS_TYPE.BrokenLight, true);
+    //    }
+    //    imageFill = vlaue;
 
-        return type;       
-    }
+    //    return type;       
+    //}
     
     // InvisibleShield
-    public void SetShieldBlockFunc(Func<bool> func)
-    {
-        shieldBlockFunc = func;
-    }
+    //public void SetShieldBlockFunc(Func<bool> func)
+    //{
+    //    shieldBlockFunc = func;
+    //}
 
-    public void RemoveShieldBlockFunc()
-    {
-        shieldBlockFunc = null;
-    }
+    //public void RemoveShieldBlockFunc()
+    //{
+    //    shieldBlockFunc = null;
+    //}
 
-    public bool TryShieldBlock()
-    {
-        return shieldBlockFunc != null && shieldBlockFunc.Invoke();
-    }
+    //public bool TryShieldBlock()
+    //{
+    //    return shieldBlockFunc != null && shieldBlockFunc.Invoke();
+    //}
 
 
     #region BUff

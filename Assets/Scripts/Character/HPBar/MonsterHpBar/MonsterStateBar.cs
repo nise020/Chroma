@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public partial class MonsterStateBar : StateBar
+public partial class MonsterStateBar : UIStateBar
 {
     private string bossName;
     //private void Awake()

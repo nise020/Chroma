@@ -7,11 +7,11 @@ public class AI_Monster : AI_Base
     protected NomalMonster Monster { get; set; }
     public override void Initialize(Character_Base _Character) => Monster = _Character as NomalMonster;
     
-    private Player TargetPlayer { get; set; } = null;
-    public Action<bool> AttackEvent { get; set; } = null;
+    private Player TargetPlayer { get; set; }
+    public Action<bool> AttackEvent { get; set; }
     //private bool TargetAlive { get; set; } = false;
-    private float ChaseTimer { get; set; } = 0.0f;
-    private float ChaseTime { get; set; } = 0.5f;
+    //private float ChaseTimer { get; set; } = 0.0f;
+    //private float ChaseTime { get; set; } = 0.5f;
 
     public enum AiState //Npc AI ป๓ลย
     {

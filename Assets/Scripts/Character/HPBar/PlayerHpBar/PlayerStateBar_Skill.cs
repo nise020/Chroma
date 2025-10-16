@@ -5,11 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
 
-public partial class PlayerStateBar : StateBar
+public partial class PlayerStateBar : UIStateBar
 {
-    Dictionary<SKILL_ID_TYPE, SkillData> SkillDatas = new Dictionary<SKILL_ID_TYPE, SkillData>();
-    Dictionary<SkillKeyType, SkillData> SkillKeyDatas = new Dictionary<SkillKeyType, SkillData>();
-    bool isBurst = false;
+  
+    
     public bool BurstSkillStat() 
     {
         if (Skill_4Image.fillAmount == 1)

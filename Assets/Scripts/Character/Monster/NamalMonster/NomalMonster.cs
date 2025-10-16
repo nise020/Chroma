@@ -3,7 +3,7 @@ using static Enums;
 
 public partial class NomalMonster : Monster_Base
 {
-    public override void HpBarInit(StateBar _hpBar)
+    public override void HpBarInit(UIStateBar _hpBar)
     {
         StateBar = _hpBar as MonsterStateBar;
     }

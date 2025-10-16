@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject PlayerStartObject;
 
     [Header("HpBar")]
-    [SerializeField] StateBar HPBAR;
+    [SerializeField] UIStateBar HPBAR;
     [SerializeField] GameObject hpBarObj;
 
     [Header("Creat")]

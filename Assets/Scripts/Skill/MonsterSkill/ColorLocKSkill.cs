@@ -19,7 +19,7 @@ public class ColorLocKSkill : IBasicSkill
         {
             float timer = 5f;
             Player player = (Player)_defender;
-            player.colorSlotUI.ColorLock((int)timer);
+            //player.colorSlotUI.ColorLock((int)timer);
         }
     }
 

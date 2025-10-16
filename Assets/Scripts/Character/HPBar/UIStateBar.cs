@@ -2,19 +2,27 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-public partial class StateBar : MonoBehaviour
+public partial class UIStateBar : MonoBehaviour
 {
     protected Character_Base Character { get; set; }
-    [SerializeField] private Image hpImage = null;
-    [SerializeField] private Image hpLateImage = null;
+    [SerializeField] private Image hpImage;
+    [SerializeField] private Image hpLateImage;
     
-    protected float HpeffectTime = 2.0f;
-
-
+    protected float HpeffectTime { get; private set; }
 
     public Action<int> AttackDamageEvent { get; set; }
-    private Coroutine HPBarEvent { get; set; } = null;
+    private Coroutine HPBarEvent { get; set; }
     protected Camera MainCamera { get; set; }
+
+    protected virtual void Awake()
+    {
+        Clear();
+    }
+    protected virtual void Clear() 
+    {
+        HpeffectTime = 2.0f;
+        HPBarEvent = null;
+    }
     protected virtual void Start()
     {
         InitializeImage();

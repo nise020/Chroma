@@ -22,7 +22,7 @@ public class MonsterManager : MonoBehaviour
     public List<GameObject> SummonMonsterList = new List<GameObject>();
 
     [SerializeField] Transform Creatab;
-    [SerializeField] StateBar HPBAR;
+    [SerializeField] UIStateBar HPBAR;
 
     GameObject CanvasObj;
     bool isUiOpen = false;
@@ -446,7 +446,7 @@ public class MonsterManager : MonoBehaviour
 
         if (monster is NomalMonster)
         {
-            StateBar hpBar = monsterObj.GetComponentInChildren<StateBar>();
+            UIStateBar hpBar = monsterObj.GetComponentInChildren<UIStateBar>();
             hpBar.InitializeCharacter(monster);
             monster.HpBarInit(hpBar);
 

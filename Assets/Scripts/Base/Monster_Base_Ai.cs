@@ -23,7 +23,7 @@ public partial class Monster_Base : Character_Base
     public void AutoMoveInit(Spawn _spown)
     {
         Spawn = _spown;
-        MovePositionList = Spawn.LoadMovePos();
+        //MovePositionList = Spawn.LoadMovePos();
         StartPoint = Spawn.gameObject.transform.position;
     }
     public void PlayerInit(Player _player,Transform _trs)

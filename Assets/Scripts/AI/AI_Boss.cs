@@ -8,11 +8,11 @@ public class AI_Boss : AI_Base
     BossMonster BOSSMONSTER { get; set; }
     public override void Initialize(Character_Base _Character) => BOSSMONSTER = _Character as BossMonster;
 
-    private Player TargetPlayer { get; set; } = null;
-    float HpValue = 0f;
+    private Player TargetPlayer { get; set; }
+    float HpValue;
     
 
-    public bool IsBurserker = false;
+    public bool IsBurserker;
 
     CHARACTER_ID Type;//= MONSTER_TYPE.None;
 
@@ -21,8 +21,12 @@ public class AI_Boss : AI_Base
     {
         TargetPlayer = _player;
         TargetTrans = _player.transform;
+        Clear();
     }
-
+    protected virtual void Clear()
+    {
+        IsBurserker = false;
+    }
 
     public void BossTypeInit(CHARACTER_ID _type)
     {
@@ -273,7 +277,7 @@ public class AI_Boss : AI_Base
         }
         else if (Type == CHARACTER_ID.Rustdrone_Boss)
         {
-            if (BOSSMONSTER.CoolTimerCheck(MONSTER_COOL_TIMER_TYPE.Skill_3) && TargetPlayer.colorSlotUI.ColorSlotState())//TargetPlayer Color
+            if (BOSSMONSTER.CoolTimerCheck(MONSTER_COOL_TIMER_TYPE.Skill_3))// && TargetPlayer.colorSlotUI.ColorSlotState())//TargetPlayer Color
             {
                 BOSSMONSTER.Ai_Attack(TargetTrans, ANIMATION_PATAMETERS_TYPE.Skill_3);
 
@@ -306,7 +310,7 @@ public class AI_Boss : AI_Base
         {
             if (BOSSMONSTER.RangeCheck(value, CHARACTER_DATA.AttackLength) == true)
             {
-                if (BOSSMONSTER.CoolTimerCheck(MONSTER_COOL_TIMER_TYPE.Skill_3) && TargetPlayer.colorSlotUI.ColorSlotState())
+                if (BOSSMONSTER.CoolTimerCheck(MONSTER_COOL_TIMER_TYPE.Skill_3))// && TargetPlayer.colorSlotUI.ColorSlotState())
                 {
                     //PlayerColor Check
                     BOSSMONSTER.Ai_Attack(TargetTrans, ANIMATION_PATAMETERS_TYPE.Skill_3);

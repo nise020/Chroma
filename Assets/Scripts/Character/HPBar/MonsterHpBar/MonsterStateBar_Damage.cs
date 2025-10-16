@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
 
-public partial class MonsterStateBar : StateBar
+public partial class MonsterStateBar : UIStateBar
 {
     [SerializeField] protected Transform Place_1 = null;
     [SerializeField] protected Transform Place_10 = null;
