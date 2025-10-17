@@ -938,7 +938,6 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6b25948b-e6cd-420f-91ce-9de83d68105c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Croma
