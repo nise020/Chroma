@@ -1,9 +1,7 @@
-using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
-using TMPro.Examples;
 using System;
 using static Enums;
 

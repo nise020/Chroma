@@ -44,7 +44,13 @@ public partial class Server : MonoBehaviour
         {
             Destroy(this);
         }
-
+        test().Forget();
+    }
+    public async UniTask test() 
+    {
+        var request = UnityWebRequest.Get(Http + rankDataListLoadUrl);
+        await request.SendWebRequest();
+        Debug.Log(request.result);
     }
     //public void OnBtnConnect() 
     //{
@@ -121,6 +127,7 @@ public partial class Server : MonoBehaviour
 
         UnityWebRequest www = UnityWebRequest.Post(Url,form);
         bool loginSuccess = false;
+        www.timeout = 20;
 
         yield return www.SendWebRequest();
 
@@ -174,7 +181,7 @@ public partial class Server : MonoBehaviour
         form.AddField("name", _name);
 
         UnityWebRequest www = UnityWebRequest.Post(Url, form);
-
+        www.timeout = 20;
         yield return www.SendWebRequest();
 
         Debug.Log(www.downloadHandler.text);
@@ -196,7 +203,7 @@ public partial class Server : MonoBehaviour
         form.AddField("pw", password);
 
         UnityWebRequest www = UnityWebRequest.Post(url, form);
-
+        www.timeout = 20;
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
@@ -215,7 +222,7 @@ public partial class Server : MonoBehaviour
        //form.AddField("pw", passward);
 
         UnityWebRequest www = UnityWebRequest.Post(Url, form);
-
+        www.timeout = 20;
         yield return www.SendWebRequest();//데이터를 받으면 아래 처리
 
         Debug.Log(www.downloadHandler.text);

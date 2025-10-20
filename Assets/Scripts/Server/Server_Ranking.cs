@@ -26,7 +26,7 @@ public partial class Server : MonoBehaviour
     public async Task<List<RankEntry>> RankListLoad(string url)
     {
         UnityWebRequest www = UnityWebRequest.Get(url);
-
+        www.timeout = 20;
         await www.SendWebRequest();
 
         List<RankEntry> serverData = new();
@@ -87,7 +87,7 @@ public partial class Server : MonoBehaviour
         form.AddField("id", _id);
 
         UnityWebRequest www = UnityWebRequest.Post(url,form);
-
+        www.timeout = 20;
         await www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
@@ -106,7 +106,7 @@ public partial class Server : MonoBehaviour
         form.AddField("score", _score);
 
         UnityWebRequest www = UnityWebRequest.Post(url,form);
-
+        www.timeout = 20;
         await www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)

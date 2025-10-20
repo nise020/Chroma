@@ -364,6 +364,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262110809560372964, guid: 8538f77998817e646a29432c00404625, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8263841844117363765, guid: 8538f77998817e646a29432c00404625, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -766,22 +790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdType: 200004
-  IsGrounded: 0
-  Velocity: {x: 0, y: 0, z: 0}
-  Gravity: -9.81
-  JumpGravity: -9.81
   IsJumping: 0
-  GroundDistance: 0.5
-  GroundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  IsDeathed: 0
-  DeathMask:
-    serializedVersion: 2
-    m_Bits: 0
   IsPaused: 0
   IsSturn: 0
-  isJump: 0
   WeaponObj: {fileID: 0}
   FootObj: {fileID: 0}
   IsOnWalkable: 0

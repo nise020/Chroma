@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 94156f61f72b54f408d7f9bfb9547503
+AssetOrigin:
+  serializedVersion: 1
+  productId: 173450
+  packageName: Sword slashes PRO
+  packageVersion: 2.3.3
+  assetPath: Assets/Hovl Studio/HSFiles/Shaders/Shader Graph/HS_Explosion.shadergraph
+  uploadId: 719260
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,10 +15,3 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
-AssetOrigin:
-  serializedVersion: 1
-  productId: 173450
-  packageName: Sword slashes PRO
-  packageVersion: 2.3.3
-  assetPath: Assets/Hovl Studio/HSFiles/Shaders/Shader Graph/HS_Explosion.shadergraph
-  uploadId: 719260
