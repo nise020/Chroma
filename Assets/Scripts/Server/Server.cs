@@ -11,7 +11,7 @@ public partial class Server : MonoBehaviour
 {
     public static Server instanse;
     //string Http = "http://58.78.211.182:3000/";//서버
-    string Http = "http://58.78.211.182:3000/";//서버
+    string Http = "http://112.159.65.128:3000/ ";//서버
     //3000<--통로
     //12/22 한정으로 사용 가능
     //https<--보안됨

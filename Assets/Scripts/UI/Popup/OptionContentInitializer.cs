@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 using static Enums;
 

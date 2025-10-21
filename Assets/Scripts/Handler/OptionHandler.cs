@@ -130,7 +130,7 @@ public class OptionHandler : MonoBehaviour
 
     public void MouseSpeed(float value)
     {
-        float speed = Mathf.Lerp(1f, 5f, value);
+        float speed = Mathf.Lerp(1f, 3f, value);
         ApplyMouseSpeed(speed).Forget();
         VolumDataSave("MouseSpeed", value).Forget();
     }
