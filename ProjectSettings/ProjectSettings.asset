@@ -938,10 +938,7 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-<<<<<<< HEAD
   cloudProjectId: 
-=======
->>>>>>> 87388df6bf6f2a9253d293a9894acb8f13faedf5
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: 
