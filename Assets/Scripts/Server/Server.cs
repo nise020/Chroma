@@ -11,7 +11,7 @@ public partial class Server : MonoBehaviour
 {
     public static Server instanse;
     //string Http = "http://58.78.211.182:3000/";//서버
-    string Http = "http://112.159.65.128:3000/ ";//서버
+    string Http = "http://112.159.65.128:3000/";//서버
     //3000<--통로
     //12/22 한정으로 사용 가능
     //https<--보안됨
@@ -38,19 +38,30 @@ public partial class Server : MonoBehaviour
         if (instanse == null)
         {
             instanse = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
         else 
         {
             Destroy(this);
         }
-        test().Forget();
+        Debug.Log($"Unity network reachability: {Application.internetReachability}");
+        //test().AttachExternalCancellation(this.GetCancellationTokenOnDestroy()).Forget();
     }
     public async UniTask test() 
     {
-        var request = UnityWebRequest.Get(Http + rankDataListLoadUrl);
-        await request.SendWebRequest();
-        Debug.Log(request.result);
+        string fullUrl = Http + rankDataListLoadUrl;
+        Debug.Log($"Requesting: {fullUrl}");
+        try
+        {
+            var request = UnityWebRequest.Get($"{Http}{rankDataListLoadUrl}");
+            request.timeout = 10;
+            await request.SendWebRequest();
+            Debug.Log(request.result);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Request Error: {e.Message}");
+        }
     }
     //public void OnBtnConnect() 
     //{
@@ -61,15 +72,10 @@ public partial class Server : MonoBehaviour
         StartCoroutine(CraetDBPost(Http + accountCreatUrl, id, passward));
         await UniTask.CompletedTask;
     }
-    public async UniTask LoginDBPost(string _id, string passward)
-    {
-        StartCoroutine(LoginDBPost(Http + loginUrl, _id, passward));
-        beforeScore = await ScoreDataLoad(_id);
-        await UniTask.CompletedTask;
-    }
+
     public async UniTask NameDBPost(string id, string name)
     {
-        StartCoroutine(NameDBPost(Http + nameCreatUrl, id, name));
+        StartCoroutine(NameDBRequest(Http + nameCreatUrl, id, name));
         await UniTask.CompletedTask;
     }
     public void MessageOn(JSONNode _json) 
@@ -119,42 +125,53 @@ public partial class Server : MonoBehaviour
         }
         loginTab.ErrorMessege(text);
     }
-    IEnumerator LoginDBPost(string Url, string _id, string _passward)
+    public async UniTask LoginDBPost(string _id, string passward)
     {
+        //StartCoroutine(LoginDBPost(Http + loginUrl, _id, passward));
+        StartCoroutine(LoginDBRequest(Http + loginUrl, _id, passward));
+
+        //beforeScore = await ScoreDataLoad(_id);
+
+        await UniTask.CompletedTask;
+    }
+    IEnumerator LoginDBRequest(string Url, string _id, string _passward)
+    {
+        Debug.Log($"Requesting: {Url}");
+
         WWWForm form = new WWWForm();
         form.AddField("id", _id);
         form.AddField("pw", _passward);
 
         UnityWebRequest www = UnityWebRequest.Post(Url,form);
         bool loginSuccess = false;
-        www.timeout = 20;
+        www.timeout = 10;
 
         yield return www.SendWebRequest();
 
         Debug.Log(www.downloadHandler.text);
 
-        if (www.result == UnityWebRequest.Result.Success) 
+        if (www.result == UnityWebRequest.Result.Success)
         {
             string response = www.downloadHandler.text;
             Debug.Log("서버 응답: " + response);
 
             JSONNode node = JSONNode.Parse(www.downloadHandler.text);
 
-            if (node.HasKey("db") || node.HasKey("err")) 
+            if (node.HasKey("db") || node.HasKey("err"))
             {
                 MessageOn(node);
                 yield break;
             }
-            
+
             for (int i = 0; i < node.Count; i++)
             {
                 string dbId = node[i]["id"];
                 string dbPw = node[i]["pw"];
                 string name = node[i]["name"];
 
-                if (dbId == _id) 
+                if (dbId == _id)
                 {
-                    if (dbPw == _passward) 
+                    if (dbPw == _passward)
                     {
                         UserId = _id;
                         Userpw = _passward;
@@ -168,13 +185,18 @@ public partial class Server : MonoBehaviour
                 }
             }
         }
+        else 
+        {
+            Debug.LogError("전송 실패: " + www.error);
+        }
 
         if (loginSuccess)
         {
             loginTab.GamePlay();
+
         }
     }
-    IEnumerator NameDBPost(string Url, string _id, string _name)
+    IEnumerator NameDBRequest(string Url, string _id, string _name)
     {
         WWWForm form = new WWWForm();
         form.AddField("id", _id);
@@ -203,7 +225,6 @@ public partial class Server : MonoBehaviour
         form.AddField("pw", password);
 
         UnityWebRequest www = UnityWebRequest.Post(url, form);
-        www.timeout = 20;
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
