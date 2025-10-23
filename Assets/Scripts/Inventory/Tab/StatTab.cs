@@ -152,14 +152,18 @@ public class StatTab : MonoBehaviour
     public void StatPlus(CHARACTER_STATUS type, int value)
     {
         if (value <= 0) return;     
-        if (statPoint <= 0) return;  
+        if (statPoint <= 0) return;
 
-        committedPoints[type] += value;  
-        statPoint -= value;
+        int alloc = Mathf.Min(value, statPoint);
+        if (alloc <= 0) return;
+
+        committedPoints[type] += alloc;  
+        statPoint -= alloc;
+
+        if (statPoint < 0) statPoint = 0;
 
         PLAYER.StatDataUpdate(BuildFinalStatsFromCommitted());
         RefreshUI();
-
         R?.UpdateStat(HasUnspent(), statPoint);
     }
 
