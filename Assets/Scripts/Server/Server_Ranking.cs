@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 
 public partial class Server : MonoBehaviour
 {
-    //string Http = "http://58.78.211.182:3000/";//¼­¹ö 
 
     //Rank List Load
     string rankDataListLoadUrl = "process/rankinglist";
@@ -26,7 +25,6 @@ public partial class Server : MonoBehaviour
     public async Task<List<RankEntry>> RankListLoad(string url)
     {
         UnityWebRequest www = UnityWebRequest.Get(url);
-        www.timeout = 20;
         await www.SendWebRequest();
 
         List<RankEntry> serverData = new();
@@ -87,7 +85,6 @@ public partial class Server : MonoBehaviour
         form.AddField("id", _id);
 
         UnityWebRequest www = UnityWebRequest.Post(url,form);
-        www.timeout = 20;
         await www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
@@ -106,7 +103,6 @@ public partial class Server : MonoBehaviour
         form.AddField("score", _score);
 
         UnityWebRequest www = UnityWebRequest.Post(url,form);
-        www.timeout = 20;
         await www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)

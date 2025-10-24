@@ -11,7 +11,8 @@ public partial class Server : MonoBehaviour
 {
     public static Server instanse;
     //string Http = "http://58.78.211.182:3000/";//서버
-    string Http = "http://112.159.65.128:3000/ ";//서버
+    string Http = "http://112.159.65.67:3000/";//서버
+    //http://112.159.65.128:3000/
     //3000<--통로
     //12/22 한정으로 사용 가능
     //https<--보안됨
@@ -44,14 +45,39 @@ public partial class Server : MonoBehaviour
         {
             Destroy(this);
         }
-        test().Forget();
+        //on().Forget();
     }
-    public async UniTask test() 
+
+    async UniTask on()
     {
-        var request = UnityWebRequest.Get(Http + rankDataListLoadUrl);
-        await request.SendWebRequest();
-        Debug.Log(request.result);
+        string url = "http://112.159.65.128:3000/process/rankinglist";
+        Debug.Log($"[TEST] Requesting: {url}");
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        request.timeout = 10; // 10초 타임아웃
+
+        try
+        {
+            UnityWebRequestAsyncOperation operation = request.SendWebRequest();
+            
+            while (!operation.isDone)
+            {
+                Debug.Log($"[TEST] Progress: {operation.progress}");
+                await UniTask.Delay(500);
+            }
+
+            Debug.Log($"[TEST] Done. Result: {request.result}");
+            Debug.Log($"[TEST] Response Code: {request.responseCode}");
+            Debug.Log($"[TEST] Error: {request.error}");
+            Debug.Log($"[TEST] Downloaded Text: {request.downloadHandler.text}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[TEST] Exception: {e.Message}");
+        }
     }
+
+
     //public void OnBtnConnect() 
     //{
     //    //StartCoroutine(DBPost(Http+ LoginUrl, "dev"));
@@ -61,12 +87,7 @@ public partial class Server : MonoBehaviour
         StartCoroutine(CraetDBPost(Http + accountCreatUrl, id, passward));
         await UniTask.CompletedTask;
     }
-    public async UniTask LoginDBPost(string _id, string passward)
-    {
-        StartCoroutine(LoginDBPost(Http + loginUrl, _id, passward));
-        beforeScore = await ScoreDataLoad(_id);
-        await UniTask.CompletedTask;
-    }
+
     public async UniTask NameDBPost(string id, string name)
     {
         StartCoroutine(NameDBPost(Http + nameCreatUrl, id, name));
@@ -119,15 +140,22 @@ public partial class Server : MonoBehaviour
         }
         loginTab.ErrorMessege(text);
     }
+
+    public async UniTask LoginDBPost(string _id, string passward)
+    {
+        StartCoroutine(LoginDBPost(Http + loginUrl, _id, passward));
+        beforeScore = await ScoreDataLoad(_id);
+        await UniTask.CompletedTask;
+    }
     IEnumerator LoginDBPost(string Url, string _id, string _passward)
     {
+        Debug.Log($"Requesting: {Url}");
         WWWForm form = new WWWForm();
         form.AddField("id", _id);
         form.AddField("pw", _passward);
 
         UnityWebRequest www = UnityWebRequest.Post(Url,form);
         bool loginSuccess = false;
-        www.timeout = 20;
 
         yield return www.SendWebRequest();
 
@@ -136,7 +164,7 @@ public partial class Server : MonoBehaviour
         if (www.result == UnityWebRequest.Result.Success) 
         {
             string response = www.downloadHandler.text;
-            Debug.Log("서버 응답: " + response);
+            Debug.Log("Server : " + response);
 
             JSONNode node = JSONNode.Parse(www.downloadHandler.text);
 
@@ -168,7 +196,10 @@ public partial class Server : MonoBehaviour
                 }
             }
         }
-
+        else
+        {
+            Debug.LogError("전송 실패: " + www.error);
+        }
         if (loginSuccess)
         {
             loginTab.GamePlay();
@@ -181,7 +212,7 @@ public partial class Server : MonoBehaviour
         form.AddField("name", _name);
 
         UnityWebRequest www = UnityWebRequest.Post(Url, form);
-        www.timeout = 20;
+        //www.timeout = 20;
         yield return www.SendWebRequest();
 
         Debug.Log(www.downloadHandler.text);

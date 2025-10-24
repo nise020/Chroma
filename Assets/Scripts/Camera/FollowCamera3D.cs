@@ -24,6 +24,7 @@ public class FollowCamera3D : MonoBehaviour
     [SerializeField] private float clipBuffer = 0.05f;  // 벽과 카메라 사이 여유
     [SerializeField] private float smooth = 10f;
     [SerializeField] private float minDistance = 0.5f;
+    Vector3 velocity = Vector3.zero;
     private LayerMask obstructionMask;
     private float currentDistance;
 
@@ -140,8 +141,8 @@ public class FollowCamera3D : MonoBehaviour
         {
             camPos = pivot + dir * minDistance;
         }
-
-        transform.position = camPos;
+        //float smooth = 0.1f;
+        transform.position = Vector3.Lerp(transform.position, camPos, rotSensitive);
         transform.LookAt(pivot);
 
     }

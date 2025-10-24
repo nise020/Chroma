@@ -7,7 +7,7 @@ public class Manager_Base : MonoBehaviour
 {
     public virtual UniTask Initialize(string _Str)
     {
-        Debug.Log($"Initializing {_Str}...");
+        //Debug.Log($"Initializing {_Str}...");
         return UniTask.CompletedTask;
     }
     public void Initialized(string _Str) => Debug.Log($"Initialized {_Str}");
