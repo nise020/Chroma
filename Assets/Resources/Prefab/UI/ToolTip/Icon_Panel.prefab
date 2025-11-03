@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4394020467849432251}
   - component: {fileID: 6582410746468732577}
   m_Layer: 7
-  m_Name: Controll_Icon (4)
+  m_Name: Controll_Icon (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 1119241779570257333}
   - component: {fileID: 6619259414372059243}
   m_Layer: 7
-  m_Name: Controll_Icon (2)
+  m_Name: Controll_Icon (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -906,9 +906,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6862988447293405902}
-  - {fileID: 3675833770569454119}
   - {fileID: 6607724338584529397}
   - {fileID: 838270950972963611}
+  - {fileID: 3675833770569454119}
   m_Father: {fileID: 1815880962839203621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -2865,7 +2865,7 @@ GameObject:
   - component: {fileID: 8342006998190121069}
   - component: {fileID: 131153453836969361}
   m_Layer: 7
-  m_Name: Controll_Icon (3)
+  m_Name: Controll_Icon (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3379,7 +3379,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x
@@ -3485,7 +3485,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x
@@ -3591,7 +3591,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x
@@ -3697,7 +3697,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x
@@ -3803,7 +3803,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x
@@ -3909,7 +3909,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x
@@ -4015,7 +4015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849556694120402169, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5353161875766360643, guid: 93a4108bebf35fe46bd288dd18347b7a, type: 3}
       propertyPath: m_Pivot.x

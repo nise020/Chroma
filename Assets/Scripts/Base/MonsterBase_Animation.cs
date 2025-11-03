@@ -6,7 +6,7 @@ using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 using System.Collections;
 
-public partial class Monster_Base : Character_Base
+public partial class MonsterBase : CharacterBase
 {
 
     public override void KnockBackOn(float _value)
@@ -93,7 +93,7 @@ public partial class Monster_Base : Character_Base
             CharacterSoundPlayer.PlayOneShot(clip);
         }
     }
-    protected IEnumerator DeathEffectOn(Monster_Base _monster,System.Action onComplete = null) 
+    protected IEnumerator DeathEffectOn(MonsterBase _monster,System.Action onComplete = null) 
     {
         if (!deathEffect.gameObject.activeSelf) 
         {
@@ -112,7 +112,7 @@ public partial class Monster_Base : Character_Base
 
         GameShard.Instance.MonsterManager.Resurrection(_monster);
     }
-    protected IEnumerator SpownEffectOn(Monster_Base _monster, System.Action onComplete = null)
+    protected IEnumerator SpownEffectOn(MonsterBase _monster, System.Action onComplete = null)
     {
         if (!SpownEffect.gameObject.activeSelf)
         {

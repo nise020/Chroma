@@ -2,7 +2,7 @@ using UnityEngine;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
-public partial class Monster_Base : Character_Base
+public partial class MonsterBase : CharacterBase
 {
     public virtual void StateReset() 
     {

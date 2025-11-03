@@ -16,7 +16,7 @@ public class TrowWeapon : MonsterWeapon
     public override void init(Transform _trs) => activeTab = _trs;
     public float Speed;
     TrowSkill trowSkill { get; set; }
-    public override void init(Character_Base _user) => Character = _user;
+    public override void init(CharacterBase _user) => Character = _user;
     //public override void StateInit(Dictionary<CHARACTER_STATUS, int> _state) 
     //{
     //    Speed = (float)_state[MONSTER_STATE.Projectile_Speed];

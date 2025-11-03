@@ -8,6 +8,8 @@ using static Enums.CONFIG_OBJECT_TYPE;
 
 public abstract class IBasicSkill
 {
+    protected SkillData skillData { get; set; }
+    protected ParticleSystem effect{ get; set; }
     public enum HitPointDirection 
     {
         None,
@@ -24,13 +26,11 @@ public abstract class IBasicSkill
 
     public HitPointDirection Hit_Point { get; set; }
     public SKILL_ID_TYPE SkILL_Id { get; set; }
-    protected SkillData skillData { get; set; }
     protected GameObject EffectObj { get; set; }
-    protected ParticleSystem effect{ get; set; }
     protected BUFFTYPE bUFFTYPE { get; set; }
     private CancellationTokenSource effectCTS { get; set; } = null;
 
-    protected Character_Base CHARECTER;
+    protected CharacterBase CHARECTER;
 
     protected Transform SkillTab;
     protected bool IsActive = false;
@@ -47,7 +47,7 @@ public abstract class IBasicSkill
     CancellationTokenSource SkillCTS { get; set; } = null;
     int _effectRunId = 0;
     Transform oneHitTran;
-    public virtual void Init(Character_Base _user)
+    public virtual void Init(CharacterBase _user)
     {
         CHARECTER = _user;
         rd = _user.GetComponent<Rigidbody>();
@@ -63,15 +63,17 @@ public abstract class IBasicSkill
         switch (_hit) 
         {
             case SkILLTYPE.Short:
+            case SkILLTYPE.Dash:
             case SkILLTYPE.ShortBuff:
                // return CHARECTER.GetWeaponObj();
                 return CHARECTER.gameObject;
 
-            case SkILLTYPE.Long:
             case SkILLTYPE.LongBuff:
-                return CHARECTER.gameObject;
+                return CHARECTER.GetWeaponObj();
 
             case SkILLTYPE.Area:
+            case SkILLTYPE.Auto:
+            case SkILLTYPE.Burst:
             case SkILLTYPE.AreaBuff:
                 return EffectObj;
 
@@ -80,7 +82,7 @@ public abstract class IBasicSkill
     }
 
 
-    protected void SkillOn(Character_Base _defender) 
+    protected void SkillOn(CharacterBase _defender) 
     {
         oneHitTran = HitObject.transform;
         rd.MovePosition(rd.position + CHARECTER.transform.forward);
@@ -110,7 +112,7 @@ public abstract class IBasicSkill
 
     }
 
-    protected async UniTaskVoid effectCheckAsync(CancellationTokenSource _skillToken, Character_Base _defender,int myRunId)
+    protected async UniTaskVoid effectCheckAsync(CancellationTokenSource _skillToken, CharacterBase _defender,int myRunId)
     {
         int repeatCount = skillData.skillCountMax;
         float duration = effect.main.duration;
@@ -234,7 +236,7 @@ public abstract class IBasicSkill
             CHARECTER.BuffSystem.ApplyBuff(skillData.buffId);
         }
     }
-    protected virtual async UniTask DistanseCheckAsync(CancellationTokenSource _token, Character_Base _defender)
+    protected virtual async UniTask DistanseCheckAsync(CancellationTokenSource _token, CharacterBase _defender)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(0.2f), cancellationToken: _token.Token);
     }
@@ -260,12 +262,14 @@ public abstract class IBasicSkill
         if (skillData.prefab != "" &&
             skillData.prefab != "0") 
         {
-            EffectObj = Shared.Instance.ResourcesManager.CreatObject(Skill, skillData.prefab);
-            EffectObj.transform.SetParent(_patrnt);
+            EffectObj = Shared.Instance.ResourcesManager.
+                CreatObject(Skill, skillData.prefab);
 
             effect = EffectObj.GetComponent<ParticleSystem>();
 
             EffectSound = EffectObj.AddComponent<AudioSource>();
+
+            EffectObj.transform.SetParent(_patrnt);
 
             EffectSound = Shared.Instance.SoundManager.SoundSetting(skillData.SoundId, EffectSound);//Test
             //EffectClip = Shared.Instance.SoundManager.ClipGet(skillData.SoundId);
@@ -358,7 +362,7 @@ public abstract class IBasicSkill
 
     public virtual void OnUpdate() { }
     public virtual void TriggerOut() { }
-    public abstract void OnTrigger(Character_Base _defender);
+    public abstract void OnTrigger(CharacterBase _defender);
 
     #region
     /*private void StartBuffTickLoop()

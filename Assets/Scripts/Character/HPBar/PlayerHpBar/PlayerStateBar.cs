@@ -122,7 +122,7 @@ public partial class PlayerStateBar : UIStateBar
     }
 
 
-    public override void InitializeCharacter(Character_Base character)
+    public override void InitializeCharacter(CharacterBase character)
     {
         base.InitializeCharacter(character);
     }

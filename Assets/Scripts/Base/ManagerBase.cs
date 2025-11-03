@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-public class Manager_Base : MonoBehaviour
+public class ManagerBase : MonoBehaviour
 {
     public virtual UniTask Initialize(string _Str)
     {

@@ -5,7 +5,7 @@ using static Enums;
 public class ThunderboltSkill : IBasicSkill
 {
     //public SkillData skillData { get; set; }
-    private Monster_Base monster;
+    private MonsterBase monster;
     //public override SKILL_ID_TYPE SkILL_Id => SKILL_ID_TYPE.Thunderbolt;
 
     Color copyColor;
@@ -17,9 +17,9 @@ public class ThunderboltSkill : IBasicSkill
     List<GameObject> trapObjList = new List<GameObject>();
     Dictionary<GameObject, TrapWeapon> trapData = new Dictionary<GameObject, TrapWeapon>();
 
-    public override void Init(Character_Base _user) 
+    public override void Init(CharacterBase _user) 
     {
-        monster = (Monster_Base)_user;
+        monster = (MonsterBase)_user;
         List<GameObject> objLists = monster.GetWeaponsKey();
        // Dictionary<GameObject, bool> objData = monster.GetWeaponsData();
 
@@ -39,7 +39,7 @@ public class ThunderboltSkill : IBasicSkill
     }
     public override void OnUpdate() { }
     public override void TriggerOut() { }
-    public override void OnTrigger(Character_Base _defender) 
+    public override void OnTrigger(CharacterBase _defender) 
     {
         int falseCount = 0;
         List<GameObject> objList = new List<GameObject>();

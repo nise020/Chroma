@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.U2D;
 
 using static Enums;
-public class AtlasManager : Manager_Base
+public class AtlasManager : ManagerBase
 {
     public Dictionary<CONFIG_ATLAS_TYPE, SpriteAtlas> atlasSprites = new();
     public async override UniTask Initialize(string _Str)

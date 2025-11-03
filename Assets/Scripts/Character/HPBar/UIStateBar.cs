@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public partial class UIStateBar : MonoBehaviour
 {
-    protected Character_Base Character { get; set; }
+    protected CharacterBase Character { get; set; }
     [SerializeField] private Image hpImage;
     [SerializeField] private Image hpLateImage;
     
@@ -31,7 +31,7 @@ public partial class UIStateBar : MonoBehaviour
     {
         MainCamera = Camera.main;
     }
-    public virtual void InitializeCharacter(Character_Base character)
+    public virtual void InitializeCharacter(CharacterBase character)
     {
         character.HpBarChanged += SetHP;
         Character = character;
@@ -60,14 +60,12 @@ public partial class UIStateBar : MonoBehaviour
 
     public virtual void SetHP(float _MaxHP, float _CurHP)
     {
-        Debug.Log("[HpBar] SetHP 호출 시작");
-
         if (!gameObject.activeSelf) return;
         hpImage.fillAmount = _CurHP / _MaxHP;
 
         if (_CurHP / _MaxHP > hpLateImage.fillAmount)
         {
-            hpLateImage.fillAmount = hpImage.fillAmount; // 회복은 즉시 반영
+            hpLateImage.fillAmount = hpImage.fillAmount;
         }
         else
         {
@@ -76,6 +74,7 @@ public partial class UIStateBar : MonoBehaviour
         }
 
         HPBarEvent = StartCoroutine(setHpEvent());
+        Debug.Log($"{gameObject}.SetHP Event Start");
     }
 
     private IEnumerator setHpEvent()

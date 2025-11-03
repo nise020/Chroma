@@ -214,9 +214,6 @@ public class LoginTab : MonoBehaviour
 
         await Server.instanse.LoginDBPost(id, password);
         //await Server.instanse.LoginDBPost(IDKey, UserPassKey);
-
-        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
-
         //Shared.Instance.isPlay = true;
 
         await UniTask.CompletedTask;
@@ -232,20 +229,17 @@ public class LoginTab : MonoBehaviour
 
         await Server.instanse.AccountCreat(IDKey,UserPassKey);
         await Server.instanse.NameDBPost(IDKey, NameKey);
-
-        
-        await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
         
 
         LoginBut.interactable = true;
 
-        GamePlay();
+        GamePlay().Forget();
 
         await UniTask.CompletedTask;
     }
-    public void GamePlay() 
+    public async UniTask GamePlay() 
     {
-
+        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
         Shared.Instance.isPlay = true;
     }
 }

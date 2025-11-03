@@ -2,18 +2,9 @@ using System;
 using UnityEngine;
 using static Enums;
 
-public class AI_Monster : AI_Base
+public class AIMonster : AIBase
 {
-    protected NomalMonster Monster { get; set; }
-    public override void Initialize(Character_Base _Character) => Monster = _Character as NomalMonster;
-    
-    private Player TargetPlayer { get; set; }
-    public Action<bool> AttackEvent { get; set; }
-    //private bool TargetAlive { get; set; } = false;
-    //private float ChaseTimer { get; set; } = 0.0f;
-    //private float ChaseTime { get; set; } = 0.5f;
-
-    public enum AiState //Npc AI ป๓ลย
+    public enum AiState 
     {
         Idel,
         Search,
@@ -21,6 +12,16 @@ public class AI_Monster : AI_Base
         Attack,
         Reset,
     }
+
+    protected NomalMonster Monster { get; set; }
+    public override void Initialize(CharacterBase _Character) => Monster = _Character as NomalMonster;
+    
+    private Player TargetPlayer { get; set; }
+    public Action<bool> AttackEvent { get; set; }
+    //private bool TargetAlive { get; set; } = false;
+    //private float ChaseTimer { get; set; } = 0.0f;
+    //private float ChaseTime { get; set; } = 0.5f;
+
 
     private MONSTER_ATTACK_TYPE ATTACK_TYPE;
 
@@ -33,23 +34,10 @@ public class AI_Monster : AI_Base
     public override void State()
     {
         if (TargetTrans == null) { return; }
-
-        //if (!TagetAive && monster_Ai != AiState.Search)
-        //{
-        //    monster_Ai = AiState.Idel;
-        //}
-        //if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.None)
-        //{
-        //    Debug.LogError($"preemptive_Type = {ATTACK_TYPE}");
-        //}
-
         switch (monster_Ai)
         {
             case AiState.Idel:
                 Idel();
-                break;
-            case AiState.Search:
-                Search();
                 break;
             case AiState.Move:
                 Move(TargetTrans.position);
@@ -60,6 +48,9 @@ public class AI_Monster : AI_Base
             case AiState.Reset:
                 Reset();
                 break;
+            //case AiState.Search:
+            //    Search();
+            //    break;
         }
     }
     protected override void Idel()
@@ -68,26 +59,27 @@ public class AI_Monster : AI_Base
 
         if (Monster.RangeCheck(value, CHARACTER_DATA.FOVLength) == true)
         {
-            if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.Preemptive)
-            {
-                monster_Ai = AiState.Move;
-            }
-            else if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.Non_Preemptive)//Non Preemptive_Strike
-            {
-                //if (Monster.HitStateCheck())
-                //{
-                //    monster_Ai = AiState.Move;
-                //}
-                //else
-                //{
-                //    monster_Ai = AiState.Search;
-                //}
-                monster_Ai = AiState.Move;
-            }
-            else 
-            {
-                monster_Ai = AiState.Move;
-            }
+            monster_Ai = AiState.Move;
+            //if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.Preemptive)
+            //{
+            //    monster_Ai = AiState.Move;
+            //}
+            //else if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.Non_Preemptive)//Non Preemptive_Strike
+            //{
+            //    //if (Monster.HitStateCheck())
+            //    //{
+            //    //    monster_Ai = AiState.Move;
+            //    //}
+            //    //else
+            //    //{
+            //    //    monster_Ai = AiState.Search;
+            //    //}
+            //    monster_Ai = AiState.Move;
+            //}
+            //else 
+            //{
+            //    monster_Ai = AiState.Move;
+            //}
             //else if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.C_Preemptive)//Non Preemptive_Strike
             //{
             //    monster_Ai = AiState.Attack;
@@ -95,6 +87,7 @@ public class AI_Monster : AI_Base
         }
         else
         {
+            //monster_Ai = AiState.Search;
             monster_Ai = AiState.Move;
             //if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.C_Preemptive)//Non Preemptive_Strike
             //{
@@ -147,9 +140,10 @@ public class AI_Monster : AI_Base
     {
         float value = Monster.TargetDistanseCheck(TargetTrans.position);
 
-        if (Monster.RangeCheck(value, CHARACTER_DATA.AttackLength) == true)//Preemptive_Strike
+        if (Monster.RangeCheck(value, CHARACTER_DATA.AttackLength) == true)
         {
             monster_Ai = AiState.Attack;
+            #region before
 
             //if (Monster.RangeCheck(value, CHARACTER_DATA.AttackLength) == true)//Preemptive_Strike
             //{
@@ -161,6 +155,7 @@ public class AI_Monster : AI_Base
             //    Monster.AI_TargetChase(_pos, value);
             //    Debug.Log($"npcAi={monster_Ai}");
             //}
+            #endregion
 
         }
         else
@@ -192,7 +187,7 @@ public class AI_Monster : AI_Base
         if (Monster.RangeCheck(value, CHARACTER_DATA.AttackLength) == true)//Preemptive_Strike                                                                             
         {
             Monster.Ai_Attack(TargetTrans, ANIMATION_PATAMETERS_TYPE.Skill_1);
-            monster_Ai = AiState.Move;
+            monster_Ai = AiState.Reset;
             //Debug.Log($"npcAi={monster_Ai}");
 
             //if (ATTACK_TYPE == MONSTER_ATTACK_TYPE.C_Preemptive)//CPreemptive
@@ -237,11 +232,10 @@ public class AI_Monster : AI_Base
 
     protected override void Reset()
     {
-        if (Monster.StartPointMove())
-        {
-            monster_Ai = AiState.Idel;
-        }
-
+        //if (Monster.StartPointMove())
+        //{
+        //    monster_Ai = AiState.Idel;
+        //}
         float value = Monster.TargetDistanseCheck(TargetTrans.position);
 
         if (Monster.RangeCheck(value, CHARACTER_DATA.AttackLength) == true)//Preemptive_Strike
@@ -250,10 +244,11 @@ public class AI_Monster : AI_Base
         }
         else
         {
-            if (Monster.StartPointMove())
-            {
-                monster_Ai = AiState.Idel;
-            }
+            monster_Ai = AiState.Idel;
+            //if (Monster.StartPointMove())
+            //{
+            //    monster_Ai = AiState.Idel;
+            //}
         }
 
     }

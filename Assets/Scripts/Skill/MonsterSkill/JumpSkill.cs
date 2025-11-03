@@ -8,26 +8,27 @@ using static Enums;
 
 public class JumpSkill : IBasicSkill
 {
+
     //public SkillData skillData { get; set; }
-    GameObject weaponObj;
-    MonsterWeapon Weapon;
+    //GameObject weaponObj;
+    //MonsterWeapon Weapon;
     //protected CancellationTokenSource JumpCTS;
 
     //public override SKILL_ID_TYPE SkILL_Id => SKILL_ID_TYPE.Jump;
     float speed;
-    public override void Init(Character_Base _user) 
+    public override void Init(CharacterBase _user) 
     {
-        CHARECTER = (Monster_Base)_user;
+        CHARECTER = (MonsterBase)_user;
         speed = (float)CHARECTER.StatusData[Enums.CHARACTER_STATUS.Speed];
         //EffectAddData(CHARECTER.transform);
         base.Init(_user);
     }
-    public override void OnTrigger(Character_Base _defender) 
+    public override void OnTrigger(CharacterBase _defender) 
     {
         AttackOn(_defender).Forget();
     }
 
-    private async UniTask AttackOn(Character_Base _defender)
+    private async UniTask AttackOn(CharacterBase _defender)
     {
         Vector3 start = HitObject.transform.position;
         float elapsed = 0f;
@@ -75,7 +76,7 @@ public class JumpSkill : IBasicSkill
         SkillOn(_defender);
     }
 
-    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, Character_Base _defender)
+    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, CharacterBase _defender)
     {
 
         try

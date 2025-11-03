@@ -7,12 +7,12 @@ public class StatBuffStrategy : IBuffStrategy
     public float Elapsed => elapsed;
     public StatBuffStrategy(BuffData data) { this.buffData = data; }
 
-    public override void Init(Character_Base _user, BuffData data)
+    public override void Init(CharacterBase _user, BuffData data)
     {
         base.Init(_user, data);
     }
 
-    public override void ApplyBuff(Character_Base target)
+    public override void ApplyBuff(CharacterBase target)
     {
         switch (buffData.type)
         {
@@ -63,7 +63,7 @@ public class StatBuffStrategy : IBuffStrategy
         }
     }
 
-    public override void RemoveBuff(Character_Base target)
+    public override void RemoveBuff(CharacterBase target)
     {
         switch (buffData.type)
         {

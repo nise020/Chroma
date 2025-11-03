@@ -40,7 +40,6 @@ public partial class MenuSystem : MonoBehaviour
     Player PLAYER;
     public bool isInvenOpen = false;
     private GameObject currentSubUI = null;
-    //Stack<GameObject> UiActiveSatckData = new();
     AudioSource UiPlayer;
     GameObject beUiPopObj;
     Dictionary<GameObject, Toggle> UiTabData = new Dictionary<GameObject, Toggle>();
@@ -339,13 +338,13 @@ public partial class MenuSystem : MonoBehaviour
         }
         else 
         {
-            if (GameShard.Instance.GameUiManager.UiActiveSatckData.Count != 0) 
-            {
-                GameObject top = GameShard.Instance.GameUiManager.UiActiveSatckData.Pop();
-                Toggle beforeToggle = UiTabData[top];
-                beforeToggle.isOn = false;
-                top.SetActive(false);
-            }
+            //if (GameShard.Instance.GameUiManager.UiActiveSatckData.Count != 0) 
+            //{
+            //    GameObject top = GameShard.Instance.GameUiManager.UiActiveSatckData.Pop();
+            //    Toggle beforeToggle = UiTabData[top];
+            //    beforeToggle.isOn = false;
+            //    top.SetActive(false);
+            //}
 
             GameShard.Instance.GameUiManager.UiActiveSatckData.Push(_obj.gameObject);
             _obj.SetActive(true);
@@ -354,26 +353,26 @@ public partial class MenuSystem : MonoBehaviour
         }
         
     }
-    public void invenOpen()
-    {
-        if (itemTab == null) 
-        { 
-            Debug.Log("InvenObj is null");
-            return; 
-        }
+    //public void invenOpen()
+    //{
+    //    if (itemTab == null) 
+    //    { 
+    //        Debug.Log("InvenObj is null");
+    //        return; 
+    //    }
 
 
-        if (!isInvenOpen)
-        {
-            isInvenOpen = true;
-            ToggleTab.SetActive(true);
-            toggles[lastTabIndex].SetIsOnWithoutNotify(true);
-            ShowOnlyPanel(lastTabIndex);
-            UiActive(true);
-            return;
-        }
-        CloseInventoryImmediate();
-    }
+    //    if (!isInvenOpen)
+    //    {
+    //        isInvenOpen = true;
+    //        ToggleTab.SetActive(true);
+    //        toggles[lastTabIndex].SetIsOnWithoutNotify(true);
+    //        ShowOnlyPanel(lastTabIndex);
+    //        UiActive(true);
+    //        return;
+    //    }
+    //    CloseInventoryImmediate();
+    //}
 
     public void ApplyPlayer(Player _player) 
     {
@@ -447,12 +446,12 @@ public partial class MenuSystem : MonoBehaviour
         UiActive(false);
     }
 
-    public void CloseInventory()
-    {
-        if (!ToggleTab || !ToggleTab.activeSelf) return;
+    //public void CloseInventory()
+    //{
+    //    if (!ToggleTab || !ToggleTab.activeSelf) return;
 
-        CloseInventoryImmediate();
-    }
+    //    CloseInventoryImmediate();
+    //}
 
     #region Quick Slot
     public bool AssignEmptyQuickSlot(ItemBase item)

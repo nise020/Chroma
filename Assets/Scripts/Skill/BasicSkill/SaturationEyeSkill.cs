@@ -8,7 +8,7 @@ public class SaturationEyeSkill : IBasicSkill
     private bool isUsed = false;
     //public override SKILL_ID_TYPE SkILL_Id => SKILL_ID_TYPE.SaturationEye;
 
-    public override void Init(Character_Base character)
+    public override void Init(CharacterBase character)
     {
         this.Player = (Player)character;
 
@@ -39,7 +39,7 @@ public class SaturationEyeSkill : IBasicSkill
     }
 
     public override void OnUpdate() { }
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
     }
 }

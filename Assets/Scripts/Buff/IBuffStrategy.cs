@@ -5,7 +5,7 @@ using static Enums;
 public abstract class IBuffStrategy
 {
     protected BuffData buffData;
-    protected Character_Base target;
+    protected CharacterBase target;
 
     public BuffData BuffData => buffData;
 
@@ -22,7 +22,7 @@ public abstract class IBuffStrategy
     public virtual float GetElapsed() => 0f; // 하위 클래스에서 override
     public virtual float GetDuration() => buffData != null ? buffData.time : 0f;
 
-    public virtual void Init(Character_Base _user, BuffData data)
+    public virtual void Init(CharacterBase _user, BuffData data)
     {
         buffData = data;
         target = _user;
@@ -117,12 +117,12 @@ public abstract class IBuffStrategy
         TickOneShot(dt);
     }
 
-    public virtual void RemoveBuff(Character_Base target)
+    public virtual void RemoveBuff(CharacterBase target)
     {
         ReleaseSharedEffect();
     }
 
-    public abstract void ApplyBuff(Character_Base target);
+    public abstract void ApplyBuff(CharacterBase target);
     public abstract bool IsFinished();
 
     protected void AcquireOwnedEffect(string path, Transform parent)

@@ -15,7 +15,7 @@ public class DashSkill : IBasicSkill
     GameObject Hand;
     // private Transform grabTarget;
     protected float speed;
-    public override void Init(Character_Base _user)
+    public override void Init(CharacterBase _user)
     {
         CHARECTER = _user;
         base.Init(_user);
@@ -23,7 +23,7 @@ public class DashSkill : IBasicSkill
         //EffectAddData(CHARECTER.transform);
     }
     public override void OnUpdate() { }
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
         SkillOn(_defender);
         //if (DashCTS == null)
@@ -35,7 +35,7 @@ public class DashSkill : IBasicSkill
         //}
 
     }
-    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, Character_Base _defender)
+    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, CharacterBase _defender)
     {
         // 시작 지점과 방향 계산
         //Vector3 start = CHARECTER.transform.forward;

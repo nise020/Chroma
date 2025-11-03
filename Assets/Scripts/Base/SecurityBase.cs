@@ -5,7 +5,7 @@ using System.Text;
 using UnityEditor;
 
 // 수정 금지
-public class Security_Base : MonoBehaviour
+public class SecurityBase : MonoBehaviour
 {
 //    protected T Load_Json<T>(string _Name, ref T _obj)
 //    {

@@ -12,7 +12,7 @@ public class BrokenLightKill : IBasicSkill
     //public SkillData skillData { get; set; }
     //bool IsActive { get; set; } = false;
     private Player player;
-    public override void Init(Character_Base character) 
+    public override void Init(CharacterBase character) 
     {
         this.player = (Player)character;
         base.Init(null);
@@ -31,7 +31,7 @@ public class BrokenLightKill : IBasicSkill
     }
 
 
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
     }
 

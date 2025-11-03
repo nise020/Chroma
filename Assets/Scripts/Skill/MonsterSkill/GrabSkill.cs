@@ -16,14 +16,14 @@ public class GrabSkill : IBasicSkill
    // GameObject WeaponObj;
     GameObject Hand;
     private Transform grabTarget;
-    public override void Init(Character_Base _user)
+    public override void Init(CharacterBase _user)
     {
-        CHARECTER = (Monster_Base)_user;
+        CHARECTER = (MonsterBase)_user;
         base.Init(_user);
         //EffectAddData(CHARECTER.transform);
     }
     public override void OnUpdate() { }
-    public override void OnTrigger(Character_Base _defender) 
+    public override void OnTrigger(CharacterBase _defender) 
     {
         //WeaponObj = CHARECTER.GetWeaponObj();
         Hand = CHARECTER.GetHand();
@@ -81,7 +81,7 @@ public class GrabSkill : IBasicSkill
         }
 
     }
-    protected override async UniTask DistanseCheckAsync(CancellationTokenSource token,Character_Base _defender)
+    protected override async UniTask DistanseCheckAsync(CancellationTokenSource token,CharacterBase _defender)
     {
         _defender.transform.position = Hand.transform.position;
         try

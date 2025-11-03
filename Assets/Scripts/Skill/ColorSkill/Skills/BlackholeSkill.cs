@@ -23,7 +23,7 @@ public class BlackholeSkill : SkillBase
         Collider[] hits = Physics.OverlapSphere(origin, radius, LayerMask.GetMask("Monster"));
         for (int i = 0; i < hits.Length; i++)
         {
-            var target = hits[i].GetComponent<Character_Base>();
+            var target = hits[i].GetComponent<CharacterBase>();
             if (target != null)
             {
                 Vector3 pullDir = (origin - target.transform.position).normalized;

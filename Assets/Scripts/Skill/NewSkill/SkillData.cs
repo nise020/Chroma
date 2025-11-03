@@ -3,12 +3,14 @@ using UnityEngine;
 public enum SkILLTYPE
 {
     Short = 1,
-    Long = 2,
+    Dash = 2,
     Area = 3,
-    Buff = 4,
-    ShortBuff = 5,
-    LongBuff = 6,
-    AreaBuff = 7, 
+    Auto = 4,
+    Burst = 5,
+    Buff = 6,
+    ShortBuff = 7,
+    LongBuff = 8,
+    AreaBuff = 9, 
 }
 
 public class SkillData

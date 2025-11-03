@@ -16,10 +16,10 @@ public abstract class MonsterWeapon : Weapon
     protected GameObject weaponObj{ get; set; }
     protected ParticleSystem Effect { get; set; }
     protected GameObject EffectObj { get; set; }
-    protected Character_Base Character { get; set; }
-    protected Character_Base Target { get; set; }
+    protected CharacterBase Character { get; set; }
+    protected CharacterBase Target { get; set; }
     
-    public virtual void init(Character_Base _user) => Character = _user;
+    public virtual void init(CharacterBase _user) => Character = _user;
  
     public Color CopyColor = Color.white;
     protected bool DamageCheck = false;

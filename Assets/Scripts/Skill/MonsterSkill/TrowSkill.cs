@@ -7,16 +7,16 @@ public class TrowSkill : IBasicSkill
 {
     //public SkillData skillData { get; set; }
     //public override SKILL_ID_TYPE SkILL_Id => SKILL_ID_TYPE.Trow;
-    private Monster_Base monster;
+    private MonsterBase monster;
     //GameObject WeaponObj;
     TrowWeapon trowWeapon;
     bool isAttacking { get; set; } = false;
     public Transform activeTab { get; set; }
     protected CancellationTokenSource ThrowCTS;
-    Character_Base target { get; set; }
-    public override void Init(Character_Base _user)
+    CharacterBase target { get; set; }
+    public override void Init(CharacterBase _user)
     {
-        monster = (Monster_Base)_user;
+        monster = (MonsterBase)_user;
         //weaponObj = monster.GetWeaponObj();
         trowWeapon = WeaponObj.GetComponent<TrowWeapon>();
         if (trowWeapon != null) 
@@ -25,7 +25,7 @@ public class TrowSkill : IBasicSkill
         }
         EffectAddData(monster.transform);
     }
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
         if (activeTab == null) 
         {

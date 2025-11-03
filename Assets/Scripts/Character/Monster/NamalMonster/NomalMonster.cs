@@ -1,14 +1,14 @@
 using UnityEngine;
 using static Enums;
 
-public partial class NomalMonster : Monster_Base
+public partial class NomalMonster : MonsterBase
 {
     public override void HpBarInit(UIStateBar _hpBar)
     {
         StateBar = _hpBar as MonsterStateBar;
     }
 
-    AI_Monster AI = new AI_Monster();
+    AIMonster AI = new AIMonster();
 
     //public bool isAttackDelayTimer = false;
     protected Renderer rend;
@@ -16,7 +16,7 @@ public partial class NomalMonster : Monster_Base
 
     public override void StateReset()
     {
-        AI.MyAIState = AI_Monster.AI_STATE.Idle;
+        AI.MyAIState = AIMonster.AI_STATE.Idle;
         StatusData[CHARACTER_STATUS.Hp] = StatusData[CHARACTER_STATUS.MaxHp];
 
         StateBar.InitializeImage();

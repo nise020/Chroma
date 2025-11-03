@@ -14,7 +14,7 @@ public class InvisibleShieldSkill : IBasicSkill
 
 
 
-    public override void Init(Character_Base character)
+    public override void Init(CharacterBase character)
     {
         this.player = (Player)character;
 
@@ -25,7 +25,7 @@ public class InvisibleShieldSkill : IBasicSkill
         base.Init(null);
     }
 
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
         if (isShieldActive)
             return;

@@ -4,7 +4,7 @@ using UnityEngine;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
-public partial class BossMonster : Monster_Base
+public partial class BossMonster : MonsterBase
 {
     
     bool PhaseState = false;

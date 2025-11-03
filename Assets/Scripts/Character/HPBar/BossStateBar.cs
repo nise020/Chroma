@@ -11,7 +11,7 @@ public class BossStateBar : MonsterStateBar
         gameObject.SetActive(true);
     }
 
-    public override void InitializeCharacter(Character_Base character)
+    public override void InitializeCharacter(CharacterBase character)
     {
         BossMonster boss = character as BossMonster;
         string text = boss.PathData[Enums.CHARACTER_DATA.Name];

@@ -145,6 +145,7 @@ public partial class Server : MonoBehaviour
     {
         StartCoroutine(LoginDBPost(Http + loginUrl, _id, passward));
         beforeScore = await ScoreDataLoad(_id);
+
         await UniTask.CompletedTask;
     }
     IEnumerator LoginDBPost(string Url, string _id, string _passward)
@@ -202,7 +203,7 @@ public partial class Server : MonoBehaviour
         }
         if (loginSuccess)
         {
-            loginTab.GamePlay();
+            loginTab.GamePlay().Forget();
         }
     }
     IEnumerator NameDBPost(string Url, string _id, string _name)
@@ -234,7 +235,7 @@ public partial class Server : MonoBehaviour
         form.AddField("pw", password);
 
         UnityWebRequest www = UnityWebRequest.Post(url, form);
-        www.timeout = 20;
+        //www.timeout = 20;
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)

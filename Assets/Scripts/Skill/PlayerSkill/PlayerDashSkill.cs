@@ -6,16 +6,16 @@ using static Enums;
 
 public class PlayerDashSkill : DashSkill
 {
-    List<Monster_Base> MonsterList = new List<Monster_Base>();
+    List<MonsterBase> MonsterList = new List<MonsterBase>();
     //Room Room;
-    public override void Init(Character_Base _user)
+    public override void Init(CharacterBase _user)
     {
         CHARECTER = _user as Player;
         base.Init(_user);
         //EffectAddData(CHARECTER.transform);
         //MonsterList = Player.MyRoom.inMonsterLists;
     }
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
         
         SkillOn(_defender);
@@ -28,7 +28,7 @@ public class PlayerDashSkill : DashSkill
         //}
 
     }
-    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, Character_Base _defender)
+    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, CharacterBase _defender)
     {
         MonsterList = GameShard.Instance.MonsterManager.NowStagMonterList;
 

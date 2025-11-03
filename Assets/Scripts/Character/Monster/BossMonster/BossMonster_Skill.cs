@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;*/
 using static Enums;
 
-public partial class BossMonster : Monster_Base
+public partial class BossMonster : MonsterBase
 {
 
 }

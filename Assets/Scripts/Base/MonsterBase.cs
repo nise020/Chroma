@@ -10,7 +10,7 @@ using static Enums.CHARACTER_DATA;
 using static Enums.CHARACTER_STATUS;
 //using Unity.Android.Gradle.Manifest;
 
-public partial class Monster_Base : Character_Base
+public partial class MonsterBase : CharacterBase
 {
     
 

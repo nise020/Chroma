@@ -29,7 +29,7 @@ public class WindBladeSkill : SkillBase
             Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.identity, LayerMask.GetMask("Monster"));
             for (int j = 0; j < hits.Length; j++)
             {
-                var target = hits[j].GetComponent<Character_Base>();
+                var target = hits[j].GetComponent<CharacterBase>();
                 if (target != null)
                 {
                     //GameShard.Instance.BattleManager.DamageCheck(player, target);//Damage 수정 필요

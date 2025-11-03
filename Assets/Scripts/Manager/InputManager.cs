@@ -55,21 +55,23 @@ public class InputManager : MonoBehaviour
     }
     private void Update()
     {
-        inputEvent();
+        InputEvent();
     }
 
-    public void inputEvent()
+    public void InputEvent()
     {
+        #region InputStop
         if (isFade) { return; }
         if (!isPlay) 
         {
             Cursor.lockState = CursorLockMode.None;
             return; 
         }
+        #endregion
+
         //Queue.Add(Input)
         UiButtonInput();
         PlayerInput();
-
         //Action.Add(Queue)
         ControllEventOn();
     }
@@ -97,11 +99,11 @@ public class InputManager : MonoBehaviour
             Vector2 type = MouseMoveQueData.Dequeue();
             MouseMoveEventData?.Invoke(type);
         }
-        //while (PlayerMoveQueData.Count > 0)
-        //{
-        //    Vector3 type = PlayerMoveQueData.Dequeue();
-        //    PlayerMoveEventData?.Invoke(type);
-        //}
+        while (PlayerMoveQueData.Count > 0)
+        {
+            Vector3 type = PlayerMoveQueData.Dequeue();
+            PlayerMoveEventData?.Invoke(type);
+        }
         while (MouseScrollQueData.Count > 0)
         {
             float type = MouseScrollQueData.Dequeue();
@@ -156,14 +158,15 @@ public class InputManager : MonoBehaviour
         }
 
         //Direction
-        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 
+                                  0, Input.GetAxisRaw("Vertical"));
         if (move.magnitude > 0.1f)
         {
-            PlayerMoveEventData?.Invoke(move);
+            PlayerMoveQueData.Enqueue(move);
             isMoving = true;
 
+            //PlayerMoveEventData?.Invoke(move);
             //PlayerMoveQueData.Clear(); // 이전 값 버리기
-            //PlayerMoveQueData.Enqueue(move);
         }
         else 
         {

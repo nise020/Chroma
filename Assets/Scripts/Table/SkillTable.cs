@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using static Enums;
 
 public class SkillTable : Table_Base
 {
@@ -25,6 +26,7 @@ public class SkillTable : Table_Base
     }
 
     public Dictionary<int, SkillData> SkillTableData = new Dictionary<int, SkillData>();
+    public List<int> SkillIdData = new List<int>();
 
     public SkillData Get(int id)
     {
@@ -76,6 +78,8 @@ public class SkillTable : Table_Base
                 salePoint = info.SalePoint,
                 SoundId = info.SoundId,
             };
+
+            SkillIdData.Add(info.Id);
 
             skill.LoadResource();
             SkillTableData.Add(skill.id, skill);

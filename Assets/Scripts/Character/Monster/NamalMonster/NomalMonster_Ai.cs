@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
-public partial class NomalMonster : Monster_Base
+public partial class NomalMonster : MonsterBase
 {
     //public override void StatusUpdate(float _hp)
     //{

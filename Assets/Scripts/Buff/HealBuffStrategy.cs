@@ -13,8 +13,8 @@ public class HealBuffStrategy : IBuffStrategy
         this.tickTimer = 0f;
     }
 
-    public override void ApplyBuff(Character_Base target) { }
-    public override void RemoveBuff(Character_Base target) { }
+    public override void ApplyBuff(CharacterBase target) { }
+    public override void RemoveBuff(CharacterBase target) { }
 
     public override void Tick(float deltaTime)
     {

@@ -1,12 +1,12 @@
 using UnityEngine;
-using static AI_Monster;
+using static AIMonster;
 using static Enums;
 
-public class AI_Boss : AI_Base
+public class AIBoss : AIBase
 {
 
     BossMonster BOSSMONSTER { get; set; }
-    public override void Initialize(Character_Base _Character) => BOSSMONSTER = _Character as BossMonster;
+    public override void Initialize(CharacterBase _Character) => BOSSMONSTER = _Character as BossMonster;
 
     private Player TargetPlayer { get; set; }
     float HpValue;

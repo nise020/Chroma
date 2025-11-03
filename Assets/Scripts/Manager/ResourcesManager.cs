@@ -199,10 +199,7 @@ public class ResourcesManager : MonoBehaviour
                 continue;
             }
 
-            if (effectPrefabData.ContainsKey(path))
-            {
-                continue;
-            }
+            if (effectPrefabData.ContainsKey(path)) { continue; }
 
             GameObject prefab = Resources.Load<GameObject>(path);
             if (prefab == null)
@@ -211,8 +208,6 @@ public class ResourcesManager : MonoBehaviour
                 continue;
             }
 
-            //GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, SkillTab);
-            //obj.SetActive(false);
             effectPrefabData.Add(path, prefab);
         }
     }
@@ -220,7 +215,7 @@ public class ResourcesManager : MonoBehaviour
         public void ResoursLoadPlyer()
         {
             GameObject go = Resources.Load<GameObject>("Prefab/Character/Player/Player");
-            Character_Base character = go.GetComponent<Character_Base>();
+            CharacterBase character = go.GetComponent<CharacterBase>();
             var table = Shared.Instance.DataManager.Character_Table.Get((int)character.IdType);
 
             if (table.Id == (int)CHARACTER_ID.Player)//Player
@@ -252,7 +247,7 @@ public class ResourcesManager : MonoBehaviour
                 continue;
             }
 
-            Character_Base character = go.GetComponent<Character_Base>();
+            CharacterBase character = go.GetComponent<CharacterBase>();
 
             var table = Shared.Instance.DataManager.Character_Table.Get((int)character.IdType);
 

@@ -7,7 +7,7 @@ using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 using static Enums.CHARACTER_DATA;
 using static Enums.CHARACTER_STATUS;
-public abstract partial class Character_Base : MonoBehaviour
+public abstract partial class CharacterBase : MonoBehaviour
 {
     public abstract CONFIG_OBJECT_TYPE ObjectType { get; }
     public CHARACTER_CONDITION_STATE ConditionState { get; set; } = CHARACTER_CONDITION_STATE.Default;

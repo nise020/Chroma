@@ -7,7 +7,7 @@ using static Enums;
 using static Enums.SCENE_SCENES;
 
 
-public class SceneShared : Manager_Base
+public class SceneShared : ManagerBase
 {
     public UniTask AsyncHandler { get; private set; }
     public SCENE_SCENES CurrentScene { get; private set; }
@@ -56,7 +56,8 @@ public class SceneShared : Manager_Base
         return;
     }
 
-    public async UniTask SceneChangeAsync(SCENE_SCENES _Scene, LoadSceneMode _mode, Func<Func<float, UniTask>, UniTask> onDone = null)
+    public async UniTask SceneChangeAsync(SCENE_SCENES _Scene, LoadSceneMode _mode, 
+        Func<Func<float, UniTask>, UniTask> _onDone = null)
     {
 
         Shared.Instance.SoundManager.BgmPlaying(false);
@@ -82,8 +83,8 @@ public class SceneShared : Manager_Base
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(Enums.EnumToCustomString(_Scene)));
 
         #endregion
+        
         await Shared.Instance.UIManager.LodingText();
-
 
         await Shared.Instance.SceneShared.LoadNextSceneAndInitializeAsync(_Scene, _mode, async (p) =>
         {
@@ -93,6 +94,7 @@ public class SceneShared : Manager_Base
 
         UpdateCurrentScene();
 
+        #region if(Additive)
 
         //if (_mode == LoadSceneMode.Additive) 
         //{
@@ -105,10 +107,12 @@ public class SceneShared : Manager_Base
 
         //if (onDone != null)  await onDone();
 
+        #endregion
 
-        if (onDone != null)
+
+        if (_onDone != null)
         {
-            await onDone(async (p) =>
+            await _onDone(async (p) =>
             {
                 await Shared.Instance.UIManager.UpdateLoadingBar(0.5f + p * 0.5f, (int)_Scene);
                 await UniTask.Yield();
@@ -146,7 +150,6 @@ public class SceneShared : Manager_Base
         {
             for(int i = 0; i < 5; i++)
             {
-
             await UniTask.Delay(300);
             await report(i / 5f); 
 
@@ -164,10 +167,8 @@ public class SceneShared : Manager_Base
         {
             for (int i = 0; i < 5; i++)
             {
-
                 await UniTask.Delay(300);
                 await report(i / 5f);
-
             }
 
             await WaitLoadRankData();

@@ -499,7 +499,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    private void MonsterDied(Monster_Base monster)
+    private void MonsterDied(MonsterBase monster)
     {
         EnsureStageRecord(currentStage);
         stageLog[currentStage].totalKills++;

@@ -4,7 +4,7 @@ using UnityEngine;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
-public partial class Player : Character_Base
+public partial class Player : CharacterBase
 {
     protected void inPutKeyEvent(KeyCode type) 
     {
@@ -25,16 +25,11 @@ public partial class Player : Character_Base
 
         switch (type)
         {
-            case KeyCode.Mouse1:
-                //walkStateChange(playerStateData.runState);
-                //AvoidanceCheck();
-                break;
-
             case KeyCode.R:
             case KeyCode.Q:
             case KeyCode.E:
             case KeyCode.Space:
-                skillAttack(type);//SkillE
+                skillAttack(type);//Skill
                 break;
 
             case KeyCode.Z:
@@ -44,6 +39,11 @@ public partial class Player : Character_Base
             case KeyCode.LeftControl:
                 //blockCheck();
                 break;
+            case KeyCode.Mouse1:
+                //walkStateChange(playerStateData.runState);
+                //AvoidanceCheck();
+                break;
+
         }
     }
 
@@ -100,17 +100,10 @@ public partial class Player : Character_Base
     {
         if (this.moveDir == Vector3.zero)
         {
-            //if (CharacterSoundPlayer.isPlaying) 
-            //{
-            //    CharacterSoundPlayer.Stop();
-            //}
             return;
         }
-        //else { WlakSoundOn(); }
 
-        float rotationSpeed = 20.0f;
-
-        //if (viewcam == null) viewcam = Camera.main;
+        #region FollowCam
         Transform camTrs = viewcam.transform;
 
         Vector3 camForward = camTrs.forward;
@@ -123,28 +116,22 @@ public partial class Player : Character_Base
         Vector3 moveDir = camForward * _pos.z + camRight * _pos.x;
         moveDir.Normalize();
 
+
+        #endregion
+
+        #region value
+        float rotationSpeed = 20.0f;
         float baseSpeed = 5f;
         float maxSpeed = 10f;
-        //float speed = StatusData[CHARACTER_STATUS.Speed];
-
-        //float t = speed / 40f;
-        //t = Mathf.Clamp01(t); 
-        //float finalSpeed = Mathf.Lerp(baseSpeed, maxSpeed, t);
-
         float t = Mathf.Clamp01(StatusData[CHARACTER_STATUS.Speed] / 40f);
         float finalSpeed = Mathf.Lerp(baseSpeed, maxSpeed, t);
 
-        //Velocity.x = moveDir.x * finalSpeed;
-        //Velocity.z = moveDir.z * finalSpeed;
+        #endregion
 
         rg.MovePosition(rg.position + moveDir * finalSpeed * Time.deltaTime);
 
-        //transform.position += moveDir * speed * Time.deltaTime;
-
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation, 
-            Quaternion.LookRotation(moveDir.normalized), 
-            Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp( transform.rotation, 
+            Quaternion.LookRotation(moveDir.normalized), Time.deltaTime * rotationSpeed);
     }
 
     private void clearWalkAnimation()

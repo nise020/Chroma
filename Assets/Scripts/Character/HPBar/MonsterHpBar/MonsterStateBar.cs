@@ -15,7 +15,7 @@ public partial class MonsterStateBar : UIStateBar
        // gameObject.SetActive(false);
     }
 
-    public override void InitializeCharacter(Character_Base character)
+    public override void InitializeCharacter(CharacterBase character)
     {
         base.InitializeCharacter(character);
 

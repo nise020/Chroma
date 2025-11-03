@@ -3,17 +3,17 @@ using static Enums;
 
 public class ColorLocKSkill : IBasicSkill
 {
-    private Monster_Base monster;
+    private MonsterBase monster;
     //public SkillData skillData { get; set; }
     //public override SKILL_ID_TYPE SkILL_Id => SKILL_ID_TYPE.ColorLock;
     //bool IsActive { get; set; } = false;
-    public override void Init(Character_Base _user)
+    public override void Init(CharacterBase _user)
     {
-        monster = (Monster_Base)_user;
+        monster = (MonsterBase)_user;
     }
     public override void OnUpdate() { }
     public override void TriggerOut() { }
-    public override void OnTrigger(Character_Base _defender) 
+    public override void OnTrigger(CharacterBase _defender) 
     {
         if (_defender is Player) 
         {

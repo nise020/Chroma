@@ -92,14 +92,10 @@ public class GameShard : MonoBehaviour
     public async UniTask GameStart()
     {
         await UniTask.WhenAll(
-            GameManager.InitAsync(),
-            GameUiManager.InitAsync(),
-            StageManager.InitAsync(),
-            MonsterManager.InitAsync(),
-            BattleManager.InitAsync(),
-            InputManager.InitAsync()
+            GameManager.InitAsync(),GameUiManager.InitAsync(),
+            StageManager.InitAsync(), MonsterManager.InitAsync(),
+            BattleManager.InitAsync(),InputManager.InitAsync()
         );
-
         StageManager.EnterStage(STAGE.Stage1);
     }
 

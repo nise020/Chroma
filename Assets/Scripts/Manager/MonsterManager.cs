@@ -13,11 +13,11 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] Player PLAYER;
 
     List<GameObject> monster_ResourseObj = new List<GameObject>();
-    List<Monster_Base> monster_Summon_List = new List<Monster_Base>();
+    List<MonsterBase> monster_Summon_List = new List<MonsterBase>();
 
-    Dictionary<Monster_Base, GameObject> monsterDatas = new Dictionary<Monster_Base, GameObject>();
+    Dictionary<MonsterBase, GameObject> monsterDatas = new Dictionary<MonsterBase, GameObject>();
 
-    public List<Monster_Base> MonsterList = new List<Monster_Base>();//Creat monster List
+    public List<MonsterBase> MonsterList = new List<MonsterBase>();//Creat monster List
     //public List<GameObject> MonsterObjectList = new List<GameObject>();//Creat monster List
     public List<GameObject> SummonMonsterList = new List<GameObject>();
 
@@ -31,7 +31,7 @@ public class MonsterManager : MonoBehaviour
 
     Dictionary<int, info> stageMonsterData = new Dictionary<int, info>();
     info nowStageinfo = null;
-    public List<Monster_Base> NowStagMonterList = new List<Monster_Base>();
+    public List<MonsterBase> NowStagMonterList = new List<MonsterBase>();
     float SpownTime = 2.0f;
 
     [Header("DeathEffect")]
@@ -42,7 +42,7 @@ public class MonsterManager : MonoBehaviour
     GameObject bossSpownEffectObj;
     BossStateBar BossStateUi;
 
-    public event Action<Monster_Base> OnMonsterDied;
+    public event Action<MonsterBase> OnMonsterDied;
 
     class info
     {
@@ -103,9 +103,9 @@ public class MonsterManager : MonoBehaviour
 
     public void UiStateUpdate(bool _state)
     {
+        isUiOpen = _state;
         CleanNowStageList();
         CharacterActive(_state);
-        isUiOpen = _state;
     }
 
     private void CleanNowStageList()
@@ -159,34 +159,34 @@ public class MonsterManager : MonoBehaviour
         }
         return new Vector3(clampedX, targetPos.y, clampedZ);
     }
-    public void Resurrection(Monster_Base _monster)
+    public void Resurrection(MonsterBase _monster)
     {
-        //GameObject monsterObj = monsterDatas[_monster];
-        //monsterObj.SetActive(false);
+        _monster.gameObject.SetActive(false);
+
+        #region Boss
         if (_monster is BossMonster) 
         {
             BossStateUi.gameObject.SetActive(false);
             return;
         }
 
-        _monster.gameObject.SetActive(false);
+        #endregion
 
         if (_monster.IdType == nowStageinfo.NomalId)
         {
             nowStageinfo.nomalData.Enqueue(_monster as NomalMonster);
 
-            if (!isSpawn)
-            {
-                StartCoroutine(SpawnStart(nowStageinfo, SpownTime));
-            }
+            if (!isSpawn) { StartCoroutine(SpawnStart(nowStageinfo, SpownTime));}
         }
         else 
         {
             Destroy(_monster.gameObject);
         }     
+        //GameObject monsterObj = monsterDatas[_monster];
+        //monsterObj.SetActive(false);
     }
 
-    public void MonsterAcquired(Monster_Base m)
+    public void MonsterAcquired(MonsterBase m)
     {
         OnMonsterDied?.Invoke(m);
     }
@@ -215,7 +215,6 @@ public class MonsterManager : MonoBehaviour
             }
             else { isSpawn = true; }
 
-
             if (Creatab == null)
             {
                 GameObject go = new GameObject("MonsterTab");
@@ -228,11 +227,11 @@ public class MonsterManager : MonoBehaviour
             
             for (int i = 0; i < count; i++) 
             {
-                Monster_Base monster1 = CreatMonsterObject(info.nomal.gameObject, null, Creatab);
+                MonsterBase monster1 = CreatMonsterObject(info.nomal.gameObject, null, Creatab);
                 nowStageinfo.nomalData.Enqueue(monster1 as NomalMonster);
             }
 
-            Monster_Base monster2 = CreatMonsterObject(info.boss.gameObject, null, Creatab);
+            MonsterBase monster2 = CreatMonsterObject(info.boss.gameObject, null, Creatab);
             nowStageinfo.boss = monster2 as BossMonster;
 
         }
@@ -285,7 +284,7 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnStart(info info, float _spownDelay)
+    private IEnumerator SpawnStart(info _info, float _spownDelay)
     {
         GameObject go = GameObject.Find("Ground");
         BoxCollider boxCollider = go.GetComponent<BoxCollider>();
@@ -303,34 +302,42 @@ public class MonsterManager : MonoBehaviour
 
         while (isSpawn)
         {
-            yield return new WaitWhile(() => isUiOpen);
+            yield return new WaitWhile(() => isUiOpen);//isUiOpen == false
 
             yield return new WaitForSeconds(_spownDelay);
 
+            if (isUiOpen) { continue; }
+
             if (!isSpawn)
             {
-                yield break; // 코루틴 완전히 종료
+                yield break; 
             }
 
-            if (info.nomalData.Count > 0)
+            if (_info.nomalData.Count > 0)
             {
 
                 for (int i = 2; i > 0; i--)
                 {
-                    if (info.nomalData.Count == 0) 
+                    if (_info.nomalData.Count == 0) 
                     {
                         break;
                     }
 
-                    NomalMonster firstmoster = info.nomalData.Dequeue();
-                    firstmoster.IsPaused = false;
-
+                    NomalMonster firstmoster = _info.nomalData.Dequeue();
                     if (firstmoster == null) { continue; }
+
+                    firstmoster.IsPaused = false;
 
                     if (!firstmoster.gameObject.activeSelf)
                     {
                         firstmoster.gameObject.SetActive(true);
                     }
+
+                    firstmoster.transform.position = GetPoisotion(bounds, firstmoster.gameObject);
+                    firstmoster.StateReset();
+
+                    NowStagMonterList.Add(firstmoster);
+
 
                     Rigidbody rg = firstmoster.gameObject.GetComponent<Rigidbody>();
                     if (rg != null)
@@ -338,11 +345,6 @@ public class MonsterManager : MonoBehaviour
                         rg.linearVelocity = Vector3.zero;
                         rg.angularVelocity = Vector3.zero;
                     }
-
-                    firstmoster.transform.position = GetPoisotion(bounds, firstmoster.gameObject);
-                    firstmoster.StateReset();
-
-                    NowStagMonterList.Add(firstmoster);
                 }
 
             }
@@ -366,11 +368,11 @@ public class MonsterManager : MonoBehaviour
 
         monster_ResourseObj = Shared.Instance.ResourcesManager.character_ResourseObj;
 
-        Dictionary<int, Monster_Base> CharcterData = new Dictionary<int, Monster_Base>();
+        Dictionary<int, MonsterBase> CharcterData = new Dictionary<int, MonsterBase>();
 
         for (int i = 0; i < monster_ResourseObj.Count; i++) 
         {
-            Monster_Base monster = monster_ResourseObj[i].GetComponent<Monster_Base>();
+            MonsterBase monster = monster_ResourseObj[i].GetComponent<MonsterBase>();
 
             int id = (int)monster.IdType;
 
@@ -391,7 +393,7 @@ public class MonsterManager : MonoBehaviour
             int bossId = data.Boss_1Id;
 
 
-            if (CharcterData.TryGetValue(nomalId,out Monster_Base nomal_base)) 
+            if (CharcterData.TryGetValue(nomalId,out MonsterBase nomal_base)) 
             {
                 //NomalMonster nomal = nomal_base as NomalMonster;
 
@@ -403,7 +405,7 @@ public class MonsterManager : MonoBehaviour
             else { Debug.LogError($"{nomalId} = null"); }
 
 
-            if (CharcterData.TryGetValue(bossId, out Monster_Base boss_base))
+            if (CharcterData.TryGetValue(bossId, out MonsterBase boss_base))
             {
                 //BossMonster boss = boss_base as BossMonster;
 
@@ -420,7 +422,7 @@ public class MonsterManager : MonoBehaviour
         Debug.Log($"{stageMonsterData}");
     }
 
-    public Monster_Base CreatMonsterObject(GameObject _resorseObj, Spawn _spown,Transform _parent)
+    public MonsterBase CreatMonsterObject(GameObject _resorseObj, Spawn _spown,Transform _parent)
     {
         Vector3 pos = new Vector3(0,0.3f,0);
         if (_spown != null) 
@@ -430,7 +432,7 @@ public class MonsterManager : MonoBehaviour
 
         GameObject monsterObj = Instantiate(_resorseObj, pos, Quaternion.identity, _parent);
 
-        Monster_Base monster = monsterObj.GetComponent<Monster_Base>();
+        MonsterBase monster = monsterObj.GetComponent<MonsterBase>();
 
         monster.PlayerInit(PLAYER, Creatab);
 

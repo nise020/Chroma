@@ -4,7 +4,7 @@ using UnityEngine;
 
 using static Enums;
 
-//public class Delegate_Base : MonoBehaviour
+//public class DelegateBase : MonoBehaviour
 //{
 //    public static readonly IReadOnlyDictionary<UI_OPTION_TYPE, Action<OptionContent_Base>> keyActionMap =
 //        new Dictionary<UI_OPTION_TYPE, Action<OptionContent_Base>>

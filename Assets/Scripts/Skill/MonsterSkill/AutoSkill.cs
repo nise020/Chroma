@@ -9,23 +9,23 @@ using static Enums;
 public class AutoSkill : IBasicSkill
 {
     CancellationTokenSource AttackCTS { get; set; } = null;
-    List<Monster_Base> MonsterList = new List<Monster_Base>();
-    public override void Init(Character_Base _user)
+    List<MonsterBase> MonsterList = new List<MonsterBase>();
+    public override void Init(CharacterBase _user)
     {
         if (_user is Player)
         {
             CHARECTER = (Player)_user;
             //MonsterList = GameShard.Instance.MonsterManager.MonsterList;
         }
-        else if (_user is Monster_Base)
+        else if (_user is MonsterBase)
         {
-            CHARECTER = (Monster_Base)_user;
+            CHARECTER = (MonsterBase)_user;
         }
         base.Init(_user);
         //EffectAddData(CHARECTER.transform);
     }
 
-    public override void OnTrigger(Character_Base _defender)
+    public override void OnTrigger(CharacterBase _defender)
     {
         SkillOn(_defender);
         //if (AttackCTS != null)
@@ -48,7 +48,7 @@ public class AutoSkill : IBasicSkill
         //}
     }
 
-    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, Character_Base _defender)
+    protected override async UniTask DistanseCheckAsync(CancellationTokenSource _token, CharacterBase _defender)
     {
         MonsterList = GameShard.Instance.MonsterManager.NowStagMonterList;
         HashSet<Transform> damagedEnemies = new HashSet<Transform>();
@@ -66,14 +66,15 @@ public class AutoSkill : IBasicSkill
                         if (MonsterList[jNum] == null || damagedEnemies.Contains(MonsterList[jNum].transform)) continue;
 
 
-                        if (RangeAttackDistanseCheck(HitObject.transform.position, MonsterList[jNum].transform.position, skillData.range))
+                        if (RangeAttackDistanseCheck(HitObject.transform.position, 
+                            MonsterList[jNum].transform.position, skillData.range))
                         {
-                            Character_Base target = MonsterList[jNum];
+
+                            CharacterBase target = MonsterList[jNum];
                             GameShard.Instance.BattleManager.DamageCheck(CHARECTER, target, skillData);
 
                             damagedEnemies.Add(MonsterList[jNum].transform);
-                            Debug.LogError($"{MonsterList[jNum]},{iNum}");
-
+                            
                             //break; //break <- Only Boss
                         }
                         else

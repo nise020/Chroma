@@ -15,13 +15,13 @@ public class PurifyBladeSkill : IBasicSkill
     private float comboLockTime = 0.5f; // 공격 금지 시간
     private float lockTimer = 0f; // 타이머
 
-    public override void Init(Character_Base character)
+    public override void Init(CharacterBase character)
     {
         player = (Player)character;
         base.Init(null);
     }
 
-    public override void OnTrigger(Character_Base _defender) 
+    public override void OnTrigger(CharacterBase _defender) 
     {
         Debug.Log("PurifyBladeSkill Triggered");
 

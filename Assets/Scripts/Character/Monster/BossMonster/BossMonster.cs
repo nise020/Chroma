@@ -2,10 +2,10 @@
 using UnityEngine;
 using static Enums;
 
-public partial class BossMonster : Monster_Base
+public partial class BossMonster : MonsterBase
 {
     protected BoxCollider BossRoomColl;
-    AI_Boss AI = new AI_Boss();
+    AIBoss AI = new AIBoss();
     private Color copyColor;
     bool IsBerserker = false;
     //List<GameObject> MonsterObj_Minan_List = new List<GameObject>();
@@ -13,7 +13,7 @@ public partial class BossMonster : Monster_Base
 
     public override void StateReset()
     {
-        AI.MyAIState = AI_Boss.AI_STATE.Idle;
+        AI.MyAIState = AIBoss.AI_STATE.Idle;
     }
 
     protected override void Awake() 

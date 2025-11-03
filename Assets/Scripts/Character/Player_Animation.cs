@@ -3,7 +3,7 @@ using UnityEngine;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
-public partial class Player : Character_Base
+public partial class Player : CharacterBase
 {
     public void VoiceSoundPlay() //Event
     {

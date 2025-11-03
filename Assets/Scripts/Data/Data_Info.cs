@@ -2,7 +2,7 @@ using System;
 using ListTable = System.Collections.Generic.Dictionary<string, System.Tuple<string, System.Collections.Generic.List<object>>>;
 using IDTable = System.Collections.Generic.Dictionary<string,System.Collections.Generic.Dictionary<string, System.Tuple<string, object>>>;
 
-public class Data_Info : Security_Base
+public class Data_Info : SecurityBase
 {
     [Serializable]
     public class Option_Data

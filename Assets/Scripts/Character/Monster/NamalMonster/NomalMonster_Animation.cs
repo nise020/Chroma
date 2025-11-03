@@ -4,7 +4,7 @@ using UnityEngine;
 using static Enums;
 using static Enums.ANIMATION_PATAMETERS_TYPE;
 
-public partial class NomalMonster : Monster_Base
+public partial class NomalMonster : MonsterBase
 {
     protected override async UniTaskVoid DistanseCheckAsync(CancellationToken token)
     {
@@ -20,7 +20,7 @@ public partial class NomalMonster : Monster_Base
             //if (dist <= (float)State[MONSTER_STATE.Attack_Range])
             if (dist <= 3.0f)
             {
-                Character_Base character = PlayerTrans.gameObject.GetComponent<Character_Base>();
+                CharacterBase character = PlayerTrans.gameObject.GetComponent<CharacterBase>();
                 //GameShard.Instance.BattleManager.DamageCheck(this, character);
                 break; // �ѹ��� �����ϰ� ���� (��� �����ϰ� ������ break ����)
             }

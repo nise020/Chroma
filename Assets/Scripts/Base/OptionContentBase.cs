@@ -9,7 +9,7 @@
 //    public List<GameObject> MyObj { get; set; }
 //    public int Index { get; set; }
 //}
-//public class OptionContent_Base : MonoBehaviour
+//public class OptionContentBase : MonoBehaviour
 //{
 //    public Info dataInfo = new();
 

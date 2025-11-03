@@ -1,12 +1,12 @@
 using UnityEngine;
-using static AI_Monster;
+using static AIMonster;
 using static Enums;
 
-public class AI_Base 
+public abstract class AIBase 
 {
 
     protected Transform TargetTrans { get; set; } = null;
-    public virtual void Initialize(Character_Base _Character) { }
+    public virtual void Initialize(CharacterBase _Character) { }
     public void InitTrans(Transform _Trans) => TargetTrans = _Trans;
     protected MONSTER_AI_STATE AIState { get; set; } = MONSTER_AI_STATE.Default;
     public enum AI_STATE { Idle, Move, Attack, }

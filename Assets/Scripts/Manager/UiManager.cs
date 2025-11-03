@@ -12,7 +12,7 @@ using UnityEngine.UI;
 using static Enums;
 using static LanguageTable;
 
-public class UiManager : Manager_Base
+public class UiManager : ManagerBase
 {
     public struct PopupInfo
     {

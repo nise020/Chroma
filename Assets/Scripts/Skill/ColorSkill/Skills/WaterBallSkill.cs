@@ -25,7 +25,7 @@ public class WaterBallSkill : SkillBase
         Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.identity, LayerMask.GetMask("Monster"));
         for (int i = 0; i < hits.Length; i++)
         {
-            var target = hits[i].GetComponent<Character_Base>();
+            var target = hits[i].GetComponent<CharacterBase>();
             if (target != null)
             {
                 Vector3 dropPos = target.transform.position + Vector3.up * height;

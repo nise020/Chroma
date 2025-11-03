@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public List<Monster_Base> inMonsterLists = new List<Monster_Base>();
+    public List<MonsterBase> inMonsterLists = new List<MonsterBase>();
     
     Transform[] roomTrans;
     public bool IsActive { get; private set; }

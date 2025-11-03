@@ -26,7 +26,7 @@ public class SandstormSkill : SkillBase
         Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.identity, LayerMask.GetMask("Monster"));
         for (int i = 0; i < hits.Length; i++)
         {
-            var target = hits[i].GetComponent<Character_Base>();
+            var target = hits[i].GetComponent<CharacterBase>();
             if (target != null)
             {
                 //GameShard.Instance.BattleManager.DamageCheck(player, target);//Damage 수정 필요

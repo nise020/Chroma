@@ -1,7 +1,7 @@
 using UnityEngine;
 using static Enums;
 
-public class PlayerStateController : Character_Base
+public class PlayerStateController : CharacterBase
 {
     public override CONFIG_OBJECT_TYPE ObjectType => CONFIG_OBJECT_TYPE.Player;
     [Header("Movement")]

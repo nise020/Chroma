@@ -9,10 +9,11 @@ using static Enums.ANIMATION_PATAMETERS_TYPE;
 using static Enums.CHARACTER_DATA;
 using static Enums.CHARACTER_STATUS;
 
-public partial class Player : Character_Base
+public partial class Player : CharacterBase
 {
-    public Room MyRoom;
     public override CONFIG_OBJECT_TYPE ObjectType => CONFIG_OBJECT_TYPE.Player;
+
+    public Room MyRoom;
     protected PlayerStateBar StateBar { get; set; }
     //Test
     public BuffHUD buffHUD;

@@ -8,7 +8,7 @@ using static Enums.CHARACTER_STATUS;
 
 public class BuffSystem
 {
-    private Character_Base target;
+    private CharacterBase target;
     private Dictionary<BUFFTYPE, IBuffStrategy> activeBuffs = new();
 
     private IBuffStrategy strategy;
@@ -19,7 +19,7 @@ public class BuffSystem
 
     private CancellationTokenSource buffLoopCTS = null;
     private bool buffLoopRunning = false;
-    public void Init(Character_Base target)
+    public void Init(CharacterBase target)
     {
         this.target = target;       
     }
