@@ -14,6 +14,7 @@ public class LoginTab : MonoBehaviour
     [SerializeField] GameObject DefoltObj;
     [SerializeField] Button CreatBut;
     [SerializeField] Button LoginViewBut;
+    [SerializeField] Button QuitBut;
     [SerializeField] GameObject ErrorUi;
     Coroutine errorEvent;
 
@@ -29,6 +30,8 @@ public class LoginTab : MonoBehaviour
     [SerializeField] InputField passwordField;
 
     [SerializeField] Button LoginBut;
+    [SerializeField] Button ReturnBut;
+    [SerializeField] GameObject ReturnObj;
     [SerializeField] GameObject LoginButObj;
 
     [Header("CreatUi")]
@@ -56,6 +59,7 @@ public class LoginTab : MonoBehaviour
             creatButObj.SetActive(false);
             nameObj.SetActive(false);
 
+            ReturnObj.gameObject.SetActive(true);
         });
 
         CreatBut.onClick.AddListener(() => 
@@ -65,10 +69,38 @@ public class LoginTab : MonoBehaviour
             creatButObj.SetActive(true);
             LoginButObj.SetActive(false);
             nameObj.SetActive(true);
+
+            ReturnObj.gameObject.SetActive(true);
         });
+
+        ReturnBut.onClick.AddListener(() => 
+        {
+            DefoltObj.SetActive(true);
+            LoginObj.SetActive(false);
+            ReturnObj.SetActive(false);
+        });
+
+        QuitBut.onClick.AddListener(() =>
+        {
+            Quit();
+        });
+
+        
+
 
         ErrorUi.SetActive(false);
     }
+
+    public void Quit()
+    {
+        Debug.Log("Quit");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+Application.Quit();
+#endif
+    }
+
     private void Start()
     {
         Server.instanse.loginTab = this;

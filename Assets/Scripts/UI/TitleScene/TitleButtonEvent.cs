@@ -29,7 +29,6 @@ public class TitleButtonEvent : MonoBehaviour
 #else
 Application.Quit();
 #endif
-        //Shared.Instance.UIManager.ActivePopup(true, UI_TITLE_POPUP_LIST.Quit);
     }
 
     //public void LoadSave()
