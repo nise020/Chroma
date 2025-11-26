@@ -100,7 +100,7 @@ public abstract partial class CharacterBase : MonoBehaviour
         Gravity = -9.81f;
         JumpGravity = -9.81f;
         IsJumping = false;
-        GroundDistance = 0.5f;
+        GroundDistance = 1.0f;
 
         IsDeathed = false;
     }

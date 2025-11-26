@@ -63,16 +63,15 @@ public class JumpSkill : IBasicSkill
             await UniTask.Yield();
         }
 
-        if (rd)
-        {
-            // Rigidbody의 선형 속도를 0으로 설정하여 모든 관성을 즉시 제거
-            rd.linearVelocity = Vector3.zero;
-            // 캐릭터 컴포넌트 내부의 Velocity도 초기화
-            rd.linearVelocity = Vector3.zero;
-        }
+        CHARECTER.IsJumping = false;
         rd.isKinematic = false;
 
-        CHARECTER.IsJumping = false;
+        //if (rd)
+        //{
+        //    rd.linearVelocity = Vector3.zero;
+        //    rd.linearVelocity = Vector3.zero;
+        //}
+
         SkillOn(_defender);
     }
 
