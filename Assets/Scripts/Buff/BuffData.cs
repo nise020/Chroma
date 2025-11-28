@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using static Enums;
 
+[Serializable]
 public class BuffData
 {
     public int id;

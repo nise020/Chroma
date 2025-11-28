@@ -3,6 +3,7 @@ using System;
 using static Enums;
 using UnityEngine;
 
+[Serializable]
 public class BuffTable : Table_Base
 {
     [Serializable]

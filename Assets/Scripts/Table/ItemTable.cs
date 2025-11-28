@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
-
+[Serializable]
 public class ItemTable : Table_Base
 {
     [Serializable]
@@ -108,7 +108,7 @@ public class ItemTable : Table_Base
 
             if (!Read(reader, info, row, _StartCol))
                 break;
-             
+
             ITEMTYPE type = ConvertToItemType(info.Type);
             SUBTYPE subtype = ConvertToSubType(info.SubType, type);
 
@@ -119,10 +119,7 @@ public class ItemTable : Table_Base
             }
 
             ItemBase item = CreateAndStoreItem(info, type, subtype);
-            if (item != null)
-            {
-                item.LoadResources();
-            }
+
         }
 
         Debug.Log($"[ItemTable] Loaded {ItemTableData.Count} items " +
@@ -232,6 +229,7 @@ public class ItemTable : Table_Base
                         QuestData.Add(quest.itemId, quest);
                     break;
             }
+            item.LoadResources();
         }
     }
     #endregion

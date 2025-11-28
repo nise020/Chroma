@@ -203,7 +203,7 @@ public partial class Server : MonoBehaviour
         }
         if (loginSuccess)
         {
-            loginTab.GamePlay().Forget();
+            StartCoroutine(loginTab.GamePlay());
         }
     }
     IEnumerator NameDBPost(string Url, string _id, string _name)

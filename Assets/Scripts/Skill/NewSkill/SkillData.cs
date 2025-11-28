@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum SkILLTYPE
@@ -12,7 +13,7 @@ public enum SkILLTYPE
     LongBuff = 8,
     AreaBuff = 9, 
 }
-
+[Serializable]
 public class SkillData
 {
     public int id;
@@ -31,8 +32,8 @@ public class SkillData
     public int salePoint;
     public int SoundId;
 
-    public GameObject effectPrefab;
-    public Sprite icon;
+    //public GameObject effectPrefab;
+    //public Sprite icon;
 
     public void LoadResource()
     {

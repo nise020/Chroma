@@ -43,17 +43,26 @@ public class DataManager : ManagerBase
         Buff_Table.Init_Csv(TableType.Buff.ToString(), 1, 0);
         Skill_Table.Init_Csv(TableType.Skill.ToString(), 1, 0);
         Item_Table.Init_Csv(TableType.Item.ToString(), 1, 0);
-        //Book_Table.Init_Csv(TableType.Book.ToString(), 1, 0);
         Reward_Table.Init_Csv(TableType.Reward.ToString(), 1, 0);
         Quest_Table.Init_Csv(TableType.Quest.ToString(), 1, 0);
-        //Combination_Table.Init_Csv(TableType.Combination.ToString(), 1, 0);
         Stage_Table.Init_Csv(TableType.Stage.ToString(), 1, 0);
         Level_Table.Init_Csv(TableType.Level.ToString(), 1, 0);
         Sound_Table.Init_Csv(TableType.Sound.ToString(), 1, 0);
         Language_Table.Init_Csv(TableType.Language.ToString(), 1, 0);
+        //Book_Table.Init_Csv(TableType.Book.ToString(), 1, 0);
+        //Combination_Table.Init_Csv(TableType.Combination.ToString(), 1, 0); 
 #else
-        //Character.Init_Binary(TableType.Character.ToString());
-        //State.Init_Binary(TableType.Stat.ToString());
+        Character_Table.Init_Binary(TableType.Character.ToString());
+        Stat_Table.Init_Binary(TableType.Stat.ToString());
+        Buff_Table.Init_Binary(TableType.Buff.ToString());
+        Skill_Table.Init_Binary(TableType.Skill.ToString());
+        Item_Table.Init_Binary(TableType.Item.ToString());
+        Reward_Table.Init_Binary(TableType.Reward.ToString());
+        Quest_Table.Init_Binary(TableType.Quest.ToString());
+        Stage_Table.Init_Binary(TableType.Stage.ToString());
+        Level_Table.Init_Binary(TableType.Level.ToString());
+        Sound_Table.Init_Binary(TableType.Sound.ToString());
+        Language_Table.Init_Binary(TableType.Language.ToString());
 #endif
     }
 
@@ -61,6 +70,15 @@ public class DataManager : ManagerBase
     {
         Character_Table.Save_Binary(TableType.Character.ToString());
         Stat_Table.Save_Binary(TableType.Stat.ToString());
+        Buff_Table.Save_Binary(TableType.Buff.ToString());
+        Skill_Table.Save_Binary(TableType.Skill.ToString());
+        Item_Table.Save_Binary(TableType.Item.ToString());
+        Reward_Table.Save_Binary(TableType.Reward.ToString());
+        Quest_Table.Save_Binary(TableType.Quest.ToString());
+        Stage_Table.Save_Binary(TableType.Stage.ToString());
+        Level_Table.Save_Binary(TableType.Level.ToString());
+        Sound_Table.Save_Binary(TableType.Sound.ToString());
+        Language_Table.Save_Binary(TableType.Language.ToString());
 
 #if UNITY_EDITOR
         AssetDatabase.Refresh();
@@ -69,8 +87,8 @@ public class DataManager : ManagerBase
 
     public async override UniTask Initialize(string _str)
     {
-        await base.Initialize(_str);
         Init();
+        await base.Initialize(_str);
     }
    
 

@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 using static Enums;
-
+[Serializable]
 public class PotionItem : ItemBase
 {
     [Header("Potion Specific")]

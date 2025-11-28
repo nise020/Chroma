@@ -1,6 +1,7 @@
+using System;
 using static Enums;
 
-
+[Serializable]
 public class QuestData
 {
     public int questId;

@@ -2,8 +2,10 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System;
 //: 해킹 방지용 문자열 섞기
 
+[Serializable]
 public class Table_Base
 {
     string GetTablePath()

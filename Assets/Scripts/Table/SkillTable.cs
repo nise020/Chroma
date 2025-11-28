@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
 
+[Serializable]
 public class SkillTable : Table_Base
 {
     [Serializable]
@@ -81,7 +82,7 @@ public class SkillTable : Table_Base
 
             SkillIdData.Add(info.Id);
 
-            skill.LoadResource();
+            //skill.LoadResource();
             SkillTableData.Add(skill.id, skill);
         }
     }

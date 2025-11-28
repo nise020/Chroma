@@ -10,7 +10,8 @@ public interface ISceneInitializable
 public class Shared : MonoBehaviour
 {
     public static Shared Instance { get; set; }
-    public DataManager DataManager { get; private set; }
+    public static DataManager DataCenter { get; set; }
+    public DataManager DataManager { get; set; }
     public UiManager UIManager { get; private set; }
     public AtlasManager AtlasManager { get; private set; }
     //public Setting_Manager SettingManager { get; private set; }
@@ -24,14 +25,31 @@ public class Shared : MonoBehaviour
     [ReadOnly] public bool isPlay = false;
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            // 중복 인스턴스 파괴
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         Debug.Log(this.gameObject);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        //DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
+
+        Initializer Initializer = GetComponent<Initializer>();
+        Initializer.Initialize();
     }
 
     public async UniTask LoadManagerScripts()
     {
+        if (Instance == null)
+        {
+            // 이 로그가 빌드에서 나오면, Shared.Awake()가 Init()보다 늦게 실행된 것입니다.
+            Debug.LogError("CRITICAL FAILURE: Shared.Instance is NULL before assignment in Init!");
+            // 여기서 코드를 멈추는 것이 좋습니다. (이후 줄에서 NRE가 발생할 것이기 때문)
+            return;
+        }
+
         if (AtlasManager == null) AtlasManager = gameObject.AddComponent<AtlasManager>();
         await AtlasManager.Initialize(nameof(AtlasManager));
 

@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 using static Enums;
-
+[Serializable]
 public class ItemBase
 {
     public int itemId;
@@ -14,8 +15,8 @@ public class ItemBase
     public int maxStackCount = 1; // 기본은 스택 불가
     public int stackCount;
 
-    public GameObject prefab;
-    public Sprite icon;
+    [NonSerialized] public GameObject prefab;
+    [NonSerialized] public Sprite icon;
 
 
     public virtual bool IsStackable => maxStackCount > 1;

@@ -9,12 +9,14 @@ public class Initializer : MonoBehaviour
 {
     private void Awake()
     {
-        DontDestroyOnLoad(this);
-        Initialize();
-    }
-    private async void Initialize()
-    {
         if (Shared.Instance == null) Shared.Instance = GetComponent<Shared>();
+        //Initialize();
+    }
+    public  async void Initialize()
+    {
+        //if (Shared.Instance == null) Shared.Instance = GetComponent<Shared>();
+        await UniTask.WaitUntil(() => Shared.Instance != null);
+
         await Shared.Instance.LoadManagerScripts();
 
         await UniTask.WaitUntil(()=> Shared.Instance.isPlay == true);

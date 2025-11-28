@@ -63,13 +63,16 @@ public class ResourcesManager : MonoBehaviour
     
     public async UniTask Init()
     {
+        Debug.Log("DEBUG 1: Shared.Instance is valid. Attempting ResourcesManager assignment.");
         Shared.Instance.ResourcesManager = this;
+        Debug.Log("DEBUG 2: ResourcesManager assigned to Shared.Instance.");
 
         if (CreatTab == null)
         {
             GameObject go = new GameObject($"CreatTab");
             CreatTab = go.transform;
             DontDestroyOnLoad(CreatTab.gameObject);
+            Debug.Log("DEBUG 2.2: CreatTab Created.");
         }
 
         if (SkillTab == null)
@@ -77,6 +80,7 @@ public class ResourcesManager : MonoBehaviour
             GameObject go = new GameObject($"SkillTab");
             SkillTab = go.transform;
             DontDestroyOnLoad(SkillTab.gameObject);
+            Debug.Log("DEBUG 2.2: SkillTab Created.");
         }
 
         if (CharacterTab == null)
@@ -84,39 +88,89 @@ public class ResourcesManager : MonoBehaviour
             GameObject go = new GameObject($"CharacterTab");
             CharacterTab = go.transform;
             DontDestroyOnLoad(CharacterTab.gameObject);
+            Debug.Log("DEBUG 2.2: CharacterTab Created.");
         }
-        
-        ResoursLoadSkill();
-        ResoursLoadCharacter();
-        ResoursLoadPlyer();
-        ResourcesLoadBuff();
 
+        ResoursLoadSkill();
+        Debug.Log("DEBUG 4.1: ResoursLoadSkill finished.");
+        ResoursLoadCharacter();
+        Debug.Log("DEBUG 4.2: ResoursLoadCharacter finished.");
+        ResoursLoadPlyer();
+        Debug.Log("DEBUG 4.3: ResoursLoadPlyer finished.");
+        ResourcesLoadBuff();
+        Debug.Log("DEBUG 4.4: ResourcesLoadBuff finished. Starting direct Resources.Load.");
+
+        // ----------------------------------------------------------------------
+        // 3. 직접 Resources.Load 결과 확인 (널 체크 추가)
+        // ----------------------------------------------------------------------
         damageShader = Resources.Load<Shader>("Shader/WhiteShader");
+        if (damageShader == null) Debug.LogError("RESOURCE FAIL: Failed to load Shader/WhiteShader.");
+
         damageMaterial = Resources.Load<Material>("Material/Damage/WhiteMatarial");
+        if (damageMaterial == null) Debug.LogError("RESOURCE FAIL: Failed to load Material/Damage/WhiteMatarial.");
 
         bossDeathEffect = Resources.Load<GameObject>("Prefab/Effect/Explosion/BigExplosion");
+        if (bossDeathEffect == null) Debug.LogError("RESOURCE FAIL: Failed to load Prefab/Effect/Explosion/BigExplosion.");
+
         nomalDeathEffect = Resources.Load<GameObject>("Prefab/Effect/Explosion/SmallExplosion");
+        if (nomalDeathEffect == null) Debug.LogError("RESOURCE FAIL: Failed to load Prefab/Effect/Explosion/SmallExplosion.");
 
         FollowCamPrefab = Resources.Load<GameObject>(FollowCamPath);
+        if (FollowCamPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load FollowCamPrefab at path: {FollowCamPath}.");
 
+        MenuObj = Resources.Load<GameObject>("Prefab/UI/Menu/Menu_UI");
+        if (MenuObj == null) Debug.LogError("RESOURCE FAIL: Failed to load Menu_UI.");
 
-        MenuObj             = Resources.Load<GameObject>("Prefab/UI/Menu/Menu_UI");
-        QuestHUD            = Resources.Load<GameObject>(hudPath);
-        AreaName            = Resources.Load<GameObject>(areaPath);
-        PlayerStatePrefab   = Resources.Load<GameObject>(PlayerStateUiPath);
-        BossStatePrefab     = Resources.Load<GameObject>(BossStateUiPath);
-        FadePrefab          = Resources.Load<GameObject>(FadePath);
-        PointRemindPrefab   = Resources.Load<GameObject>(PointRemindPath);
-        ClearTabPrefab      = Resources.Load<GameObject>(ClearTabPath);
-        FailedTabPrefab     = Resources.Load<GameObject>(FailedTabPath);
-        ItemAcqstTabPrefab  = Resources.Load<GameObject>(ItemAcqstPath);
-        GameInfoPrefab      = Resources.Load<GameObject>(GameInfoPath);
-        QuickSlotPrefab     = Resources.Load<GameObject>(QuickSlotPath);
-        DimmerImagePrefab   = Resources.Load<GameObject>(DimmerImagePath);
-        FadeCanvasPrefab    = Resources.Load<GameObject>(FadeCanvasPath);
+        QuestHUD = Resources.Load<GameObject>(hudPath);
+        if (QuestHUD == null) Debug.LogError($"RESOURCE FAIL: Failed to load QuestHUD at path: {hudPath}.");
+
+        AreaName = Resources.Load<GameObject>(areaPath);
+        if (AreaName == null) Debug.LogError($"RESOURCE FAIL: Failed to load AreaName at path: {areaPath}.");
+
+        PlayerStatePrefab = Resources.Load<GameObject>(PlayerStateUiPath);
+        if (PlayerStatePrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load PlayerStatePrefab at path: {PlayerStateUiPath}.");
+
+        BossStatePrefab = Resources.Load<GameObject>(BossStateUiPath);
+        if (BossStatePrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load BossStatePrefab at path: {BossStateUiPath}.");
+
+        FadePrefab = Resources.Load<GameObject>(FadePath);
+        if (FadePrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load FadePrefab at path: {FadePath}.");
+
+        PointRemindPrefab = Resources.Load<GameObject>(PointRemindPath);
+        if (PointRemindPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load PointRemindPrefab at path: {PointRemindPath}.");
+
+        ClearTabPrefab = Resources.Load<GameObject>(ClearTabPath);
+        if (ClearTabPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load ClearTabPrefab at path: {ClearTabPath}.");
+
+        FailedTabPrefab = Resources.Load<GameObject>(FailedTabPath);
+        if (FailedTabPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load FailedTabPrefab at path: {FailedTabPath}.");
+
+        ItemAcqstTabPrefab = Resources.Load<GameObject>(ItemAcqstPath);
+        if (ItemAcqstTabPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load ItemAcqstTabPrefab at path: {ItemAcqstPath}.");
+
+        GameInfoPrefab = Resources.Load<GameObject>(GameInfoPath);
+        if (GameInfoPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load GameInfoPrefab at path: {GameInfoPath}.");
+
+        QuickSlotPrefab = Resources.Load<GameObject>(QuickSlotPath);
+        if (QuickSlotPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load QuickSlotPrefab at path: {QuickSlotPath}.");
+
+        DimmerImagePrefab = Resources.Load<GameObject>(DimmerImagePath);
+        if (DimmerImagePrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load DimmerImagePrefab at path: {DimmerImagePath}.");
+
+        FadeCanvasPrefab = Resources.Load<GameObject>(FadeCanvasPath);
+        if (FadeCanvasPrefab == null) Debug.LogError($"RESOURCE FAIL: Failed to load FadeCanvasPrefab at path: {FadeCanvasPath}.");
 
         SpownEffect = Resources.Load<GameObject>("Prefab/Effect/Buff/Debuff_03");
-        await UniTask.Yield(); 
+
+        Debug.Log("DEBUG 5.0: All direct Resources.Load completed successfully.");
+
+
+        // await UniTask.Yield(); // 이 부분은 주석 처리되어 있으므로 무시합니다.
+
+
+
+        Debug.Log("DEBUG 8: All Init tasks completed successfully.");
+        await UniTask.CompletedTask;
     }
 
     public GameObject CreatObject(CONFIG_OBJECT_TYPE _type, string _path) 
