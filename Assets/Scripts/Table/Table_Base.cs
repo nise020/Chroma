@@ -23,7 +23,7 @@ public class Table_Base
 
         b.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
 
-        TextAsset asset = Resources.Load("Tabel_" + _Name) as TextAsset;
+        TextAsset asset = Resources.Load("Table/Table_" + _Name) as TextAsset;
 
         Stream stream = new MemoryStream(asset.bytes);
 
@@ -33,7 +33,7 @@ public class Table_Base
     }
     protected void Save_Binary(string _Name, object _Obj)
     {
-        string path = GetTablePath() + "\\Table\\Resources\\" + "Table_" + _Name + ".txt";
+        string path = GetTablePath() + "\\Resources\\Table\\" + "Table_" + _Name + ".txt";
         var b = new BinaryFormatter();
 
         Stream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write);

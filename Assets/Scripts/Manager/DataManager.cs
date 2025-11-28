@@ -49,6 +49,7 @@ public class DataManager : ManagerBase
         Level_Table.Init_Csv(TableType.Level.ToString(), 1, 0);
         Sound_Table.Init_Csv(TableType.Sound.ToString(), 1, 0);
         Language_Table.Init_Csv(TableType.Language.ToString(), 1, 0);
+
         //Book_Table.Init_Csv(TableType.Book.ToString(), 1, 0);
         //Combination_Table.Init_Csv(TableType.Combination.ToString(), 1, 0); 
 #else
