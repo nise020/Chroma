@@ -317,6 +317,7 @@ public partial class Player : CharacterBase
             if (_lists[i] != SKILL_ID_TYPE.None)
             {
                 SkillKeyWardData.Add(i, _lists[i]);
+                //Debug.LogError($"skill = {_lists[i]}");
             }
         }
     }

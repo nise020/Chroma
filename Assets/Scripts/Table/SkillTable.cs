@@ -38,6 +38,12 @@ public class SkillTable : Table_Base
     public void Init_Binary(string _Name)
     {
         Load_Binary<Dictionary<int, SkillData>>(_Name, ref SkillTableData);
+
+        foreach (var skillId in SkillTableData) 
+        {
+            int key  = skillId.Key;
+            SkillIdData.Add(key);
+        }
     }
 
     public void Save_Binary(string _Name)
@@ -80,9 +86,6 @@ public class SkillTable : Table_Base
                 SoundId = info.SoundId,
             };
 
-            SkillIdData.Add(info.Id);
-
-            //skill.LoadResource();
             SkillTableData.Add(skill.id, skill);
         }
     }

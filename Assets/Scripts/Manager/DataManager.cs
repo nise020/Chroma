@@ -38,20 +38,32 @@ public class DataManager : ManagerBase
     public void Init()
     {
 #if UNITY_EDITOR
-        Character_Table.Init_Csv(TableType.Character.ToString(), 1, 0);
-        Stat_Table.Init_Csv(TableType.Stat.ToString(), 1, 0);
-        Buff_Table.Init_Csv(TableType.Buff.ToString(), 1, 0);
-        Skill_Table.Init_Csv(TableType.Skill.ToString(), 1, 0);
-        Item_Table.Init_Csv(TableType.Item.ToString(), 1, 0);
-        Reward_Table.Init_Csv(TableType.Reward.ToString(), 1, 0);
-        Quest_Table.Init_Csv(TableType.Quest.ToString(), 1, 0);
-        Stage_Table.Init_Csv(TableType.Stage.ToString(), 1, 0);
-        Level_Table.Init_Csv(TableType.Level.ToString(), 1, 0);
-        Sound_Table.Init_Csv(TableType.Sound.ToString(), 1, 0);
-        Language_Table.Init_Csv(TableType.Language.ToString(), 1, 0);
+        //Character_Table.Init_Csv(TableType.Character.ToString(), 1, 0);
+        //Stat_Table.Init_Csv(TableType.Stat.ToString(), 1, 0);
+        //Buff_Table.Init_Csv(TableType.Buff.ToString(), 1, 0);
+        //Skill_Table.Init_Csv(TableType.Skill.ToString(), 1, 0);
+        //Item_Table.Init_Csv(TableType.Item.ToString(), 1, 0);
+        //Reward_Table.Init_Csv(TableType.Reward.ToString(), 1, 0);
+        //Quest_Table.Init_Csv(TableType.Quest.ToString(), 1, 0);
+        //Stage_Table.Init_Csv(TableType.Stage.ToString(), 1, 0);
+        //Level_Table.Init_Csv(TableType.Level.ToString(), 1, 0);
+        //Sound_Table.Init_Csv(TableType.Sound.ToString(), 1, 0);
+        //Language_Table.Init_Csv(TableType.Language.ToString(), 1, 0);
 
         //Book_Table.Init_Csv(TableType.Book.ToString(), 1, 0);
         //Combination_Table.Init_Csv(TableType.Combination.ToString(), 1, 0); 
+
+        Character_Table.Init_Binary(TableType.Character.ToString());
+        Stat_Table.Init_Binary(TableType.Stat.ToString());
+        Skill_Table.Init_Binary(TableType.Skill.ToString());
+        Reward_Table.Init_Binary(TableType.Reward.ToString());
+        Quest_Table.Init_Binary(TableType.Quest.ToString());
+        Stage_Table.Init_Binary(TableType.Stage.ToString());
+        Level_Table.Init_Binary(TableType.Level.ToString());
+        Sound_Table.Init_Binary(TableType.Sound.ToString());
+        Language_Table.Init_Binary(TableType.Language.ToString());
+        Buff_Table.Init_Binary(TableType.Buff.ToString());
+        Item_Table.Init_Binary(TableType.Item.ToString());
 #else
         Character_Table.Init_Binary(TableType.Character.ToString());
         Stat_Table.Init_Binary(TableType.Stat.ToString());

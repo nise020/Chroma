@@ -62,6 +62,7 @@ public partial class Player : CharacterBase
     {
         if (SkillKeyWardData.TryGetValue(value, out SKILL_ID_TYPE skill))
         {
+            
             basicSkillSystem.SkillActive(skill);
             GameShard.Instance.GameUiManager.PlayerStateBar.SkillActive(value, skill);
             viewcam.CameraAttackMoveOn(true,2).Forget();

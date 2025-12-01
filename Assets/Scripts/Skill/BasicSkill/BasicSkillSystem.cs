@@ -53,6 +53,7 @@ public class BasicSkillSystem
                     IBasicSkill skill = SkillCreat(id, skillData.type);
                     skill.Init(_character);
                     playerSkillData.Add(id, skill);
+                    //Debug.LogError($"id = {id},skill = {skill}");
                 }
                 else 
                 {
